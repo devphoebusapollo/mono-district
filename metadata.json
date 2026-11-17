@@ -1,0 +1,6 @@
+{
+  "name": "MONO DISTRICT.",
+  "description": "Creative studio for copywriting, graphic design, and video editing. Creative execution, made simple.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
+import { EASE_EDITORIAL } from './MotionPrimitives';
 
 interface EditorialImageProps {
   src: string;
@@ -16,6 +18,15 @@ export function EditorialImage({
   priority = false,
 }: EditorialImageProps) {
   const [hasError, setHasError] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start end', 'end start'],
+  });
+
+  const parallaxY = useTransform(scrollYProgress, [0, 1], ['-3%', '3%']);
 
   if (hasError) {
     return (
@@ -43,15 +54,27 @@ export function EditorialImage({
   }
 
   return (
-    <div className={`relative w-full overflow-hidden bg-neutral-200 ${aspectClassName} ${className}`}>
-      <img
+    <motion.div
+      ref={containerRef}
+      initial={priority ? { opacity: 0, y: 12 } : { opacity: 0, y: 16 }}
+      animate={priority ? { opacity: 1, y: 0 } : undefined}
+      whileInView={priority ? undefined : { opacity: 1, y: 0 }}
+      viewport={priority ? undefined : { once: true, amount: 0.1 }}
+      transition={{ duration: 0.6, ease: EASE_EDITORIAL }}
+      className={`relative w-full overflow-hidden bg-neutral-200 ${aspectClassName} ${className}`}
+    >
+      <motion.img
         src={src}
         alt={alt}
         referrerPolicy="no-referrer"
         loading={priority ? 'eager' : 'lazy'}
+        onLoad={() => setIsLoaded(true)}
         onError={() => setHasError(true)}
-        className="w-full h-full object-cover grayscale contrast-[1.04]"
+        style={{ y: parallaxY, scale: 1.07 }}
+        animate={{ opacity: isLoaded ? 1 : 0.85 }}
+        transition={{ duration: 0.35, ease: EASE_EDITORIAL }}
+        className="w-full h-full object-cover grayscale contrast-[1.04] will-change-transform"
       />
-    </div>
+    </motion.div>
   );
 }

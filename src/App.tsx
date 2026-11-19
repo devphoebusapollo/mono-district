@@ -14,19 +14,16 @@ const CLOSING_IMAGE = '/src/assets/images/editorial_closing_suite_1794876732812.
 
 const SERVICES = [
   {
-    number: '01.',
     title: 'Copywriting',
     description:
       'Clear, engaging captions, hooks, and ad copy built to stop the scroll and drive action across social channels.',
   },
   {
-    number: '02.',
     title: 'Graphic Design',
     description:
       'Clean, purposeful social media visuals, carousels, and branded posts that make your feed stand out.',
   },
   {
-    number: '03.',
     title: 'Video Editing',
     description:
       'Engaging short-form social media videos, Reels, and ads edited to capture attention and keep your audience watching.',
@@ -186,9 +183,6 @@ export default function App() {
           <section className="max-w-[1360px] mx-auto px-6 md:px-10 lg:px-12 pt-16 sm:pt-20 lg:pt-24 pb-16 lg:pb-24">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end pb-12 lg:pb-16">
               <EditorialReveal immediate y={10} className="lg:col-span-8">
-                <p className="text-sm text-neutral-500 mb-6 tracking-wide">
-                  Dedicated Social Media Creatives <span className="mx-2 text-neutral-300" aria-hidden="true">/</span> Content Provider
-                </p>
                 <h1 className="font-display font-bold text-[clamp(2.5rem,5.2vw,4.75rem)] leading-[1.02] tracking-[-0.03em] text-[#0A0A0A] text-balance">
                   Your dedicated social media
                   <br />
@@ -256,9 +250,6 @@ export default function App() {
                         } flex flex-col justify-between`}
                       >
                         <div>
-                          <span className="block font-mono text-xs tabular-nums text-neutral-500 mb-4">
-                            {service.number}
-                          </span>
                           <h3 className="font-display font-semibold text-xl tracking-tight text-[#0A0A0A] mb-3">
                             {service.title}
                           </h3>

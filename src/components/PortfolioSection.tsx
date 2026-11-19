@@ -1,44 +1,28 @@
-import { useMemo, useState } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
-import { ArrowUpRight } from 'lucide-react';
-import {
-  PORTFOLIO_CATEGORIES,
-  PORTFOLIO_ITEMS,
-  PortfolioCategory,
-  PortfolioItem,
-} from '../data/portfolioItems';
-import { EASE_EDITORIAL, EditorialReveal, HairlineRule } from './MotionPrimitives';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useReducedMotion } from 'motion/react';
+import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
+import { PORTFOLIO_ITEMS, PortfolioItem } from '../data/portfolioItems';
+import { EditorialReveal, HairlineRule } from './MotionPrimitives';
 import { PortfolioLightbox } from './PortfolioLightbox';
 
 interface PortfolioSectionProps {
   onBookCall: () => void;
 }
 
-const INITIAL_VISIBLE_COUNT = 8;
+const ROW_ONE_ITEMS = PORTFOLIO_ITEMS.slice(0, 12);
+const ROW_TWO_ITEMS = PORTFOLIO_ITEMS.slice(12);
 
 function PortfolioTile({
   item,
-  index,
   onClick,
 }: {
   item: PortfolioItem;
-  index: number;
   onClick: () => void;
 }) {
   const [hasError, setHasError] = useState(false);
 
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 8 }}
-      transition={{
-        duration: 0.32,
-        delay: Math.min(index * 0.03, 0.24),
-        ease: EASE_EDITORIAL,
-      }}
-      className="group"
-    >
+    <article className="group w-[240px] sm:w-[270px] lg:w-[290px] shrink-0">
       <button
         type="button"
         onClick={onClick}
@@ -47,7 +31,6 @@ function PortfolioTile({
         <div className="relative aspect-square w-full overflow-hidden bg-neutral-100 border border-neutral-200">
           {hasError ? (
             <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-neutral-100">
-              <span className="font-mono text-xs text-neutral-400 mb-2">{item.index}</span>
               <span className="font-display text-sm font-medium text-neutral-700">
                 {item.title}
               </span>
@@ -55,57 +38,195 @@ function PortfolioTile({
           ) : (
             <img
               src={item.imageUrl}
-              alt={`${item.title} — ${item.category} social media posting`}
+              alt={`${item.title} — social media creative sample`}
               referrerPolicy="no-referrer"
-              loading="lazy"
+              decoding="async"
               onError={() => setHasError(true)}
               className="w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]"
             />
           )}
         </div>
 
-        <div className="pt-3.5 flex items-start justify-between gap-3">
-          <div className="min-w-0">
-            <div className="flex items-center gap-1.5 text-xs text-neutral-500">
-              <span className="font-mono tabular-nums">{item.index}</span>
-              <span aria-hidden="true">·</span>
-              <span className="truncate">{item.category}</span>
-            </div>
-            <h3 className="font-display font-medium text-sm sm:text-[15px] text-[#0A0A0A] mt-1 truncate group-hover:underline underline-offset-4">
-              {item.title}
-            </h3>
-          </div>
+        <div className="pt-3 flex items-center justify-between gap-3">
+          <h3 className="font-display font-medium text-sm sm:text-[15px] text-[#0A0A0A] truncate group-hover:underline underline-offset-4">
+            {item.title}
+          </h3>
           <ArrowUpRight
-            className="w-4 h-4 text-neutral-400 group-hover:text-[#0A0A0A] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-150 shrink-0 mt-1"
+            className="w-4 h-4 text-neutral-400 group-hover:text-[#0A0A0A] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-150 shrink-0"
             aria-hidden="true"
           />
         </div>
       </button>
-    </motion.article>
+    </article>
+  );
+}
+
+function AutoCarouselRow({
+  items,
+  rowLabel,
+  globalOffset,
+  speedPxPerSec,
+  externalPaused,
+  onSelectItem,
+}: {
+  items: readonly PortfolioItem[];
+  rowLabel: string;
+  globalOffset: number;
+  speedPxPerSec: number;
+  externalPaused: boolean;
+  onSelectItem: (globalIndex: number) => void;
+}) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const loopWidthRef = useRef<number>(0);
+  const offsetRef = useRef<number>(0);
+  const manualAnimRef = useRef<{
+    startOffset: number;
+    delta: number;
+    startTime: number;
+    duration: number;
+  } | null>(null);
+
+  const [isHovered, setIsHovered] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
+
+  const loopedItems = [...items, ...items];
+
+  const wrapOffset = useCallback((value: number, width: number) => {
+    if (width <= 0) return 0;
+    return ((value % width) + width) % width;
+  }, []);
+
+  const applyTransform = useCallback(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const w = loopWidthRef.current;
+    const wrapped = wrapOffset(offsetRef.current, w);
+    offsetRef.current = wrapped;
+    el.style.transform = `translate3d(${-wrapped}px, 0, 0)`;
+  }, [wrapOffset]);
+
+  const measureLoopWidth = useCallback(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const secondCycleFirst = el.children[items.length] as HTMLElement | undefined;
+    if (secondCycleFirst) {
+      loopWidthRef.current = secondCycleFirst.offsetLeft;
+      applyTransform();
+    }
+  }, [items.length, applyTransform]);
+
+  useEffect(() => {
+    measureLoopWidth();
+    const el = trackRef.current;
+    if (!el) return;
+
+    const resizeObserver = new ResizeObserver(() => measureLoopWidth());
+    resizeObserver.observe(el);
+    return () => resizeObserver.disconnect();
+  }, [measureLoopWidth]);
+
+  useEffect(() => {
+    let rafId = 0;
+    let lastTime = performance.now();
+
+    const tick = (now: number) => {
+      const dt = Math.min((now - lastTime) / 1000, 0.05);
+      lastTime = now;
+
+      const anim = manualAnimRef.current;
+      if (anim) {
+        const t = Math.min((now - anim.startTime) / anim.duration, 1);
+        // Smooth cubic-out curve matching [0.16, 1, 0.3, 1] feel
+        const eased = 1 - Math.pow(1 - t, 3);
+        offsetRef.current = anim.startOffset + anim.delta * eased;
+        applyTransform();
+        if (t >= 1) {
+          manualAnimRef.current = null;
+        }
+      } else if (!prefersReducedMotion && !isHovered && !isFocused && !externalPaused) {
+        offsetRef.current += speedPxPerSec * dt;
+        applyTransform();
+      }
+
+      rafId = requestAnimationFrame(tick);
+    };
+
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
+  }, [
+    speedPxPerSec,
+    prefersReducedMotion,
+    isHovered,
+    isFocused,
+    externalPaused,
+    applyTransform,
+  ]);
+
+  const nudge = (direction: -1 | 1) => {
+    const el = trackRef.current;
+    const firstCard = el?.children[0] as HTMLElement | undefined;
+    const step = firstCard ? firstCard.offsetWidth + 24 : 314;
+
+    manualAnimRef.current = {
+      startOffset: offsetRef.current,
+      delta: direction * step,
+      startTime: performance.now(),
+      duration: 380,
+    };
+  };
+
+  return (
+    <div
+      className="flex items-center gap-3 sm:gap-5"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onFocus={() => setIsFocused(true)}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+          setIsFocused(false);
+        }
+      }}
+    >
+      <button
+        type="button"
+        onClick={() => nudge(-1)}
+        aria-label={`Previous items in ${rowLabel}`}
+        className="w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center border border-neutral-300 bg-[#FAFAFA] text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white hover:border-[#0A0A0A] active:scale-[0.96] transition-all duration-150 cursor-pointer shrink-0 -mt-8 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A0A0A]"
+      >
+        <ArrowLeft className="w-4 h-4" />
+      </button>
+
+      <div className="flex-1 overflow-hidden">
+        <div
+          ref={trackRef}
+          className="flex gap-6 w-max will-change-transform"
+        >
+          {loopedItems.map((item, idx) => (
+            <PortfolioTile
+              key={`${item.id}-${idx < items.length ? 'a' : 'b'}`}
+              item={item}
+              onClick={() => onSelectItem(globalOffset + (idx % items.length))}
+            />
+          ))}
+        </div>
+      </div>
+
+      <button
+        type="button"
+        onClick={() => nudge(1)}
+        aria-label={`Next items in ${rowLabel}`}
+        className="w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center border border-neutral-300 bg-[#FAFAFA] text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white hover:border-[#0A0A0A] active:scale-[0.96] transition-all duration-150 cursor-pointer shrink-0 -mt-8 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A0A0A]"
+      >
+        <ArrowRight className="w-4 h-4" />
+      </button>
+    </div>
   );
 }
 
 export function PortfolioSection({ onBookCall }: PortfolioSectionProps) {
-  const [activeCategory, setActiveCategory] = useState<'All' | PortfolioCategory>('All');
-  const [showAll, setShowAll] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-
-  const filteredItems = useMemo(() => {
-    if (activeCategory === 'All') return PORTFOLIO_ITEMS;
-    return PORTFOLIO_ITEMS.filter((item) => item.category === activeCategory);
-  }, [activeCategory]);
-
-  const visibleItems = useMemo(() => {
-    if (activeCategory !== 'All' || showAll) {
-      return filteredItems;
-    }
-    return filteredItems.slice(0, INITIAL_VISIBLE_COUNT);
-  }, [activeCategory, filteredItems, showAll]);
-
-  const handleCategoryChange = (category: 'All' | PortfolioCategory) => {
-    setActiveCategory(category);
-    setLightboxIndex(null);
-  };
+  const isLightboxOpen = lightboxIndex !== null;
 
   return (
     <section
@@ -115,94 +236,38 @@ export function PortfolioSection({ onBookCall }: PortfolioSectionProps) {
       <HairlineRule />
 
       <div className="py-20 lg:py-28">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end mb-12 lg:mb-14">
-          <EditorialReveal className="lg:col-span-5">
-            <h2 className="font-display font-bold text-3xl sm:text-4xl tracking-[-0.025em] text-[#0A0A0A] mb-3 text-balance">
-              Selected Work.
-            </h2>
-            <p className="text-base text-neutral-600">
-              Real social media creatives produced for client feeds and campaigns.
-            </p>
-          </EditorialReveal>
+        <EditorialReveal className="mb-12 lg:mb-14">
+          <h2 className="font-display font-bold text-3xl sm:text-4xl tracking-[-0.025em] text-[#0A0A0A] mb-3 text-balance">
+            Selected Work.
+          </h2>
+          <p className="text-base text-neutral-600">
+            Real social media creatives produced for client feeds and campaigns.
+          </p>
+        </EditorialReveal>
 
-          <EditorialReveal delay={0.08} className="lg:col-span-7 flex flex-wrap lg:justify-end gap-2">
-            {PORTFOLIO_CATEGORIES.map((category) => {
-              const isActive = activeCategory === category;
-              const count =
-                category === 'All'
-                  ? PORTFOLIO_ITEMS.length
-                  : PORTFOLIO_ITEMS.filter((item) => item.category === category).length;
+        <div className="space-y-12">
+          <AutoCarouselRow
+            items={ROW_ONE_ITEMS}
+            rowLabel="samples row 1"
+            globalOffset={0}
+            speedPxPerSec={28}
+            externalPaused={isLightboxOpen}
+            onSelectItem={setLightboxIndex}
+          />
 
-              return (
-                <button
-                  key={category}
-                  type="button"
-                  onClick={() => handleCategoryChange(category)}
-                  aria-pressed={isActive}
-                  className={`relative isolate px-3.5 py-2 text-xs font-medium border transition-colors duration-150 cursor-pointer whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A0A0A] ${
-                    isActive
-                      ? 'text-white border-[#0A0A0A]'
-                      : 'bg-transparent text-neutral-600 border-neutral-200 hover:border-[#0A0A0A] hover:text-[#0A0A0A]'
-                  }`}
-                >
-                  {isActive && (
-                    <motion.span
-                      layoutId="portfolio-category-active"
-                      transition={{ duration: 0.22, ease: EASE_EDITORIAL }}
-                      className="absolute inset-0 bg-[#0A0A0A] z-0"
-                      aria-hidden="true"
-                    />
-                  )}
-                  <span className="relative z-10">
-                    {category}{' '}
-                    <span className="font-mono tabular-nums opacity-70 ml-1">{count}</span>
-                  </span>
-                </button>
-              );
-            })}
-          </EditorialReveal>
+          <AutoCarouselRow
+            items={ROW_TWO_ITEMS}
+            rowLabel="samples row 2"
+            globalOffset={ROW_ONE_ITEMS.length}
+            speedPxPerSec={-24}
+            externalPaused={isLightboxOpen}
+            onSelectItem={setLightboxIndex}
+          />
         </div>
-
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={`${activeCategory}-${showAll}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.18, ease: EASE_EDITORIAL }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10"
-          >
-            {visibleItems.map((item, idx) => (
-              <PortfolioTile
-                key={item.id}
-                item={item}
-                index={idx}
-                onClick={() => setLightboxIndex(idx)}
-              />
-            ))}
-          </motion.div>
-        </AnimatePresence>
-
-        {activeCategory === 'All' && PORTFOLIO_ITEMS.length > INITIAL_VISIBLE_COUNT && (
-          <div className="mt-14 pt-8 border-t border-neutral-200 flex flex-wrap items-center justify-between gap-4">
-            <p className="font-mono text-xs tabular-nums text-neutral-500">
-              Showing {visibleItems.length} of {PORTFOLIO_ITEMS.length} client samples
-            </p>
-            <button
-              type="button"
-              onClick={() => setShowAll((prev) => !prev)}
-              className="px-6 py-3 border border-[#0A0A0A] text-[#0A0A0A] text-xs font-medium hover:bg-[#0A0A0A] hover:text-white transition-colors duration-150 cursor-pointer whitespace-nowrap shrink-0 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A0A0A]"
-            >
-              {showAll
-                ? 'Show Fewer Samples'
-                : `View All ${PORTFOLIO_ITEMS.length} Samples`}
-            </button>
-          </div>
-        )}
       </div>
 
       <PortfolioLightbox
-        items={visibleItems}
+        items={PORTFOLIO_ITEMS}
         activeIndex={lightboxIndex}
         onClose={() => setLightboxIndex(null)}
         onNavigate={(nextIdx) => setLightboxIndex(nextIdx)}

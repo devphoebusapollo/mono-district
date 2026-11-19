@@ -80,16 +80,9 @@ export function PortfolioLightbox({
             {/* Top bar */}
             <div className="flex items-center justify-between gap-6 px-6 py-4 border-b border-neutral-200 shrink-0">
               <div className="min-w-0">
-                <div className="flex items-center gap-2 text-xs text-neutral-500">
-                  <span className="font-mono tabular-nums">{item.index}</span>
-                  <span aria-hidden="true">·</span>
-                  <span className="truncate">{item.category}</span>
-                  <span aria-hidden="true">·</span>
-                  <span className="hidden sm:inline">{item.discipline}</span>
-                </div>
                 <h3
                   id="lightbox-title"
-                  className="font-display font-semibold text-base sm:text-lg text-[#0A0A0A] truncate mt-0.5"
+                  className="font-display font-semibold text-base sm:text-lg text-[#0A0A0A] truncate"
                 >
                   {item.title}
                 </h3>
@@ -135,14 +128,13 @@ export function PortfolioLightbox({
                     transition={{ duration: 0.18, ease: EASE_EDITORIAL }}
                     className="w-full max-w-md aspect-square bg-neutral-200 border border-neutral-300 flex flex-col items-center justify-center p-8 text-center"
                   >
-                    <p className="font-mono text-xs text-neutral-500 mb-2">{item.index}</p>
                     <p className="font-display font-medium text-sm text-[#0A0A0A]">{item.title}</p>
                   </motion.div>
                 ) : (
                   <motion.img
                     key={item.id}
                     src={item.imageUrl}
-                    alt={`${item.title} — ${item.category} social media sample`}
+                    alt={`${item.title} — social media creative sample`}
                     referrerPolicy="no-referrer"
                     onError={() => setHasError(true)}
                     initial={{ opacity: 0, scale: 0.985 }}

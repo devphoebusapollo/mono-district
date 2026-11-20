@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useReducedMotion } from 'motion/react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import { PORTFOLIO_ITEMS, PortfolioItem } from '../data/portfolioItems';
-import { EditorialReveal, HairlineRule } from './MotionPrimitives';
+import { EASE_EDITORIAL, EditorialReveal, HairlineRule } from './MotionPrimitives';
 import { PortfolioLightbox } from './PortfolioLightbox';
 
 interface PortfolioSectionProps {
@@ -12,17 +12,39 @@ interface PortfolioSectionProps {
 const ROW_ONE_ITEMS = PORTFOLIO_ITEMS.slice(0, 12);
 const ROW_TWO_ITEMS = PORTFOLIO_ITEMS.slice(12);
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' ? window.matchMedia('(max-width: 639px)').matches : false
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 639px)');
+    const onChange = (event: MediaQueryListEvent) => setIsMobile(event.matches);
+    setIsMobile(mq.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+
+  return isMobile;
+}
+
 function PortfolioTile({
   item,
   onClick,
+  fullWidth = false,
 }: {
   item: PortfolioItem;
   onClick: () => void;
+  fullWidth?: boolean;
 }) {
   const [hasError, setHasError] = useState(false);
 
   return (
-    <article className="group w-[240px] sm:w-[270px] lg:w-[290px] shrink-0">
+    <article
+      className={`group shrink-0 ${
+        fullWidth ? 'w-full' : 'w-[240px] sm:w-[270px] lg:w-[290px]'
+      }`}
+    >
       <button
         type="button"
         onClick={onClick}
@@ -58,6 +80,101 @@ function PortfolioTile({
         </div>
       </button>
     </article>
+  );
+}
+
+function MobileSlideRow({
+  items,
+  rowLabel,
+  globalOffset,
+  intervalMs,
+  externalPaused,
+  onSelectItem,
+}: {
+  items: readonly PortfolioItem[];
+  rowLabel: string;
+  globalOffset: number;
+  intervalMs: number;
+  externalPaused: boolean;
+  onSelectItem: (globalIndex: number) => void;
+}) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [direction, setDirection] = useState<1 | -1>(1);
+  const [isInteracting, setIsInteracting] = useState(false);
+  const [interactionVersion, setInteractionVersion] = useState(0);
+  const prefersReducedMotion = useReducedMotion();
+
+  const stepBy = useCallback(
+    (delta: 1 | -1, isManual = false) => {
+      setDirection(delta);
+      setActiveIndex((prev) => (prev + delta + items.length) % items.length);
+      if (isManual) {
+        setInteractionVersion((v) => v + 1);
+      }
+    },
+    [items.length]
+  );
+
+  useEffect(() => {
+    if (prefersReducedMotion || externalPaused || isInteracting) return;
+
+    const timer = window.setInterval(() => {
+      stepBy(1, false);
+    }, intervalMs);
+
+    return () => window.clearInterval(timer);
+  }, [prefersReducedMotion, externalPaused, isInteracting, intervalMs, interactionVersion, stepBy]);
+
+  const activeItem = items[activeIndex];
+
+  return (
+    <div
+      className="relative"
+      onFocus={() => setIsInteracting(true)}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+          setIsInteracting(false);
+        }
+      }}
+    >
+      <div className="relative overflow-hidden">
+        <AnimatePresence mode="wait" custom={direction}>
+          <motion.div
+            key={activeItem.id}
+            custom={direction}
+            initial={{ opacity: 0, x: direction > 0 ? 28 : -28 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: direction > 0 ? -28 : 28 }}
+            transition={{ duration: 0.3, ease: EASE_EDITORIAL }}
+          >
+            <PortfolioTile
+              item={activeItem}
+              fullWidth
+              onClick={() => onSelectItem(globalOffset + activeIndex)}
+            />
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Left / Right buttons flanking the slide on mobile */}
+        <button
+          type="button"
+          onClick={() => stepBy(-1, true)}
+          aria-label={`Previous sample in ${rowLabel}`}
+          className="absolute left-3 top-[calc(50%-18px)] -translate-y-1/2 z-10 w-11 h-11 flex items-center justify-center border border-neutral-300 bg-[#FAFAFA]/95 text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white hover:border-[#0A0A0A] active:scale-[0.95] transition-all duration-150 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A0A0A]"
+        >
+          <ArrowLeft className="w-4 h-4" />
+        </button>
+
+        <button
+          type="button"
+          onClick={() => stepBy(1, true)}
+          aria-label={`Next sample in ${rowLabel}`}
+          className="absolute right-3 top-[calc(50%-18px)] -translate-y-1/2 z-10 w-11 h-11 flex items-center justify-center border border-neutral-300 bg-[#FAFAFA]/95 text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white hover:border-[#0A0A0A] active:scale-[0.95] transition-all duration-150 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A0A0A]"
+        >
+          <ArrowRight className="w-4 h-4" />
+        </button>
+      </div>
+    </div>
   );
 }
 
@@ -137,7 +254,6 @@ function AutoCarouselRow({
       const anim = manualAnimRef.current;
       if (anim) {
         const t = Math.min((now - anim.startTime) / anim.duration, 1);
-        // Smooth cubic-out curve matching [0.16, 1, 0.3, 1] feel
         const eased = 1 - Math.pow(1 - t, 3);
         offsetRef.current = anim.startOffset + anim.delta * eased;
         applyTransform();
@@ -227,6 +343,7 @@ function AutoCarouselRow({
 export function PortfolioSection({ onBookCall }: PortfolioSectionProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const isLightboxOpen = lightboxIndex !== null;
+  const isMobile = useIsMobile();
 
   return (
     <section
@@ -235,8 +352,8 @@ export function PortfolioSection({ onBookCall }: PortfolioSectionProps) {
     >
       <HairlineRule />
 
-      <div className="py-20 lg:py-28">
-        <EditorialReveal className="mb-12 lg:mb-14">
+      <div className="py-16 sm:py-20 lg:py-28">
+        <EditorialReveal className="mb-10 sm:mb-12 lg:mb-14">
           <h2 className="font-display font-bold text-3xl sm:text-4xl tracking-[-0.025em] text-[#0A0A0A] mb-3 text-balance">
             Selected Work.
           </h2>
@@ -245,25 +362,47 @@ export function PortfolioSection({ onBookCall }: PortfolioSectionProps) {
           </p>
         </EditorialReveal>
 
-        <div className="space-y-12">
-          <AutoCarouselRow
-            items={ROW_ONE_ITEMS}
-            rowLabel="samples row 1"
-            globalOffset={0}
-            speedPxPerSec={28}
-            externalPaused={isLightboxOpen}
-            onSelectItem={setLightboxIndex}
-          />
+        {isMobile ? (
+          <div className="space-y-10">
+            <MobileSlideRow
+              items={ROW_ONE_ITEMS}
+              rowLabel="samples row 1"
+              globalOffset={0}
+              intervalMs={3600}
+              externalPaused={isLightboxOpen}
+              onSelectItem={setLightboxIndex}
+            />
 
-          <AutoCarouselRow
-            items={ROW_TWO_ITEMS}
-            rowLabel="samples row 2"
-            globalOffset={ROW_ONE_ITEMS.length}
-            speedPxPerSec={-24}
-            externalPaused={isLightboxOpen}
-            onSelectItem={setLightboxIndex}
-          />
-        </div>
+            <MobileSlideRow
+              items={ROW_TWO_ITEMS}
+              rowLabel="samples row 2"
+              globalOffset={ROW_ONE_ITEMS.length}
+              intervalMs={4200}
+              externalPaused={isLightboxOpen}
+              onSelectItem={setLightboxIndex}
+            />
+          </div>
+        ) : (
+          <div className="space-y-12">
+            <AutoCarouselRow
+              items={ROW_ONE_ITEMS}
+              rowLabel="samples row 1"
+              globalOffset={0}
+              speedPxPerSec={28}
+              externalPaused={isLightboxOpen}
+              onSelectItem={setLightboxIndex}
+            />
+
+            <AutoCarouselRow
+              items={ROW_TWO_ITEMS}
+              rowLabel="samples row 2"
+              globalOffset={ROW_ONE_ITEMS.length}
+              speedPxPerSec={-24}
+              externalPaused={isLightboxOpen}
+              onSelectItem={setLightboxIndex}
+            />
+          </div>
+        )}
       </div>
 
       <PortfolioLightbox

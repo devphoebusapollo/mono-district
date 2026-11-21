@@ -9,6 +9,31 @@ export default defineConfig(() => {
     plugins: [
       react(),
       tailwindcss(),
+      {
+        name: 'resolve-og-origin',
+        transformIndexHtml(html: string): string {
+          const defaultOrigin =
+            'https://ais-pre-lfenixtyptwovoyt52bqkz-1003545204964.asia-east1.run.app';
+          const vercelProd = process.env.VERCEL_PROJECT_PRODUCTION_URL
+            ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+            : '';
+          const vercelPreview = process.env.VERCEL_URL
+            ? `https://${process.env.VERCEL_URL}`
+            : '';
+          const envOrigin = (
+            process.env.VITE_SITE_URL ||
+            vercelProd ||
+            vercelPreview ||
+            process.env.APP_URL ||
+            ''
+          ).replace(/\/+$/, '');
+
+          if (!envOrigin || envOrigin === defaultOrigin) {
+            return html;
+          }
+          return html.split(defaultOrigin).join(envOrigin);
+        },
+      },
       // Copies src/assets into dist/ so root-relative URLs like
       // "/src/assets/images/..." (e.g. generate_image output) still resolve
       // in production builds. Do not remove.

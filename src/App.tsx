@@ -3,6 +3,7 @@ import { AnimatePresence, MotionConfig, motion } from 'motion/react';
 import { ArrowRight, Menu, X } from 'lucide-react';
 import { BrandMark } from './components/BrandMark';
 import { EditorialImage } from './components/EditorialImage';
+import { FaqSection } from './components/FaqSection';
 import { EASE_EDITORIAL, EditorialReveal, HairlineRule } from './components/MotionPrimitives';
 import { PortfolioSection } from './components/PortfolioSection';
 import { ProjectBriefModal } from './components/ProjectBriefModal';
@@ -379,6 +380,9 @@ export default function App() {
               </div>
             </div>
           </section>
+
+          {/* Section 3: Frequently Asked Questions */}
+          <FaqSection onBookCall={() => openBriefModal()} />
 
           {/* Section 4: Closing Statement & Editorial Showcase */}
           <section id="start" className="bg-[#0A0A0A] text-white">

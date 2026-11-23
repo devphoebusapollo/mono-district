@@ -4,6 +4,25 @@ import fs from 'fs';
 import path from 'path';
 import {defineConfig} from 'vite';
 
+function resolveEnvOrigin(): string {
+  const vercelProd = process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : '';
+  const vercelPreview = process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : '';
+  return (
+    process.env.VITE_SITE_URL ||
+    vercelProd ||
+    vercelPreview ||
+    process.env.APP_URL ||
+    ''
+  ).replace(/\/+$/, '');
+}
+
+const DEFAULT_OG_ORIGIN =
+  'https://ais-pre-lfenixtyptwovoyt52bqkz-1003545204964.asia-east1.run.app';
+
 export default defineConfig(() => {
   return {
     plugins: [
@@ -12,31 +31,15 @@ export default defineConfig(() => {
       {
         name: 'resolve-og-origin',
         transformIndexHtml(html: string): string {
-          const defaultOrigin =
-            'https://ais-pre-lfenixtyptwovoyt52bqkz-1003545204964.asia-east1.run.app';
-          const vercelProd = process.env.VERCEL_PROJECT_PRODUCTION_URL
-            ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-            : '';
-          const vercelPreview = process.env.VERCEL_URL
-            ? `https://${process.env.VERCEL_URL}`
-            : '';
-          const envOrigin = (
-            process.env.VITE_SITE_URL ||
-            vercelProd ||
-            vercelPreview ||
-            process.env.APP_URL ||
-            ''
-          ).replace(/\/+$/, '');
-
-          if (!envOrigin || envOrigin === defaultOrigin) {
+          const envOrigin = resolveEnvOrigin();
+          if (!envOrigin || envOrigin === DEFAULT_OG_ORIGIN) {
             return html;
           }
-          return html.split(defaultOrigin).join(envOrigin);
+          return html.split(DEFAULT_OG_ORIGIN).join(envOrigin);
         },
       },
-      // Copies src/assets into dist/ so root-relative URLs like
-      // "/src/assets/images/..." (e.g. generate_image output) still resolve
-      // in production builds. Do not remove.
+      // Copies src/assets into dist/ and updates robots.txt/sitemap.xml origin
+      // for production builds.
       {
         name: 'copy-unbundled-src-assets',
         apply: 'build',
@@ -49,6 +52,21 @@ export default defineConfig(() => {
           const distAssets = path.resolve(distDir, 'src/assets');
           if (fs.existsSync(distDir) && fs.existsSync(srcAssets)) {
             fs.cpSync(srcAssets, distAssets, {recursive: true, force: true});
+          }
+
+          const envOrigin = resolveEnvOrigin();
+          if (envOrigin && envOrigin !== DEFAULT_OG_ORIGIN) {
+            for (const filename of ['robots.txt', 'sitemap.xml']) {
+              const targetPath = path.resolve(distDir, filename);
+              if (fs.existsSync(targetPath)) {
+                const raw = fs.readFileSync(targetPath, 'utf-8');
+                fs.writeFileSync(
+                  targetPath,
+                  raw.split(DEFAULT_OG_ORIGIN).join(envOrigin),
+                  'utf-8'
+                );
+              }
+            }
           }
         },
       },

@@ -75,11 +75,13 @@ export function ProjectBriefModal({
               <div className="flex items-center gap-6 min-w-0">
                 <BrandMark size="sm" />
                 <div className="sr-only sm:not-sr-only sm:flex items-center gap-2 text-xs text-neutral-500 truncate">
-                  <span id="brief-modal-title">Book a 30-minute call</span>
+                  <span id="brief-modal-title">Book a 30-minute call for your custom quote</span>
                   {defaultDiscipline && (
                     <>
                       <span aria-hidden="true">·</span>
-                      <span className="text-[#0A0A0A] font-medium">{defaultDiscipline}</span>
+                      <span className="text-[#0A0A0A] font-medium truncate">
+                        {defaultDiscipline}
+                      </span>
                     </>
                   )}
                 </div>
@@ -116,7 +118,7 @@ export function ProjectBriefModal({
 
             <div className="px-6 sm:px-8 py-4 border-t border-neutral-200 flex flex-wrap items-center justify-between gap-4 text-xs text-neutral-500 shrink-0">
               <span>
-                Prefer email?{' '}
+                Prefer a quote by email?{' '}
                 <a
                   href="mailto:support.monodistrict@gmail.com"
                   className="text-[#0A0A0A] underline underline-offset-4 hover:text-neutral-700"

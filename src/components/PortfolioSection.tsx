@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
-import { ArrowLeft, ArrowRight, ArrowUpRight, Play } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Play } from 'lucide-react';
 import { GRAPHIC_ITEMS, PORTFOLIO_ITEMS, PortfolioItem, VIDEO_ITEMS } from '../data/portfolioItems';
 import { EASE_EDITORIAL, EditorialReveal, HairlineRule } from './MotionPrimitives';
 import { PortfolioLightbox } from './PortfolioLightbox';
@@ -81,7 +81,10 @@ function PortfolioTile({
       <button
         type="button"
         onClick={onClick}
-        className="w-full text-left cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0A0A0A]"
+        aria-label={
+          item.mediaType === 'video' ? 'Play reel or video ad sample' : 'View social media graphic sample'
+        }
+        className="w-full block text-left cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0A0A0A]"
       >
         <div
           ref={containerRef}
@@ -89,8 +92,8 @@ function PortfolioTile({
         >
           {hasError ? (
             <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-neutral-100">
-              <span className="font-display text-sm font-medium text-neutral-700">
-                {item.title}
+              <span className="font-mono text-xs text-neutral-500">
+                {item.mediaType === 'video' ? 'Reel Preview' : 'Graphic Sample'}
               </span>
             </div>
           ) : item.mediaType === 'video' ? (
@@ -103,7 +106,7 @@ function PortfolioTile({
                 loop
                 playsInline
                 preload="metadata"
-                aria-label={`${item.title} — social media reel preview`}
+                aria-label="Social media reel preview"
                 onError={() => setHasError(true)}
                 className="w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]"
               />
@@ -117,23 +120,13 @@ function PortfolioTile({
           ) : (
             <img
               src={item.mediaUrl}
-              alt={`${item.title} — social media creative sample`}
+              alt="Social media graphic design sample"
               referrerPolicy="no-referrer"
               decoding="async"
               onError={() => setHasError(true)}
               className="w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]"
             />
           )}
-        </div>
-
-        <div className="pt-3 flex items-center justify-between gap-3">
-          <h3 className="font-display font-medium text-sm sm:text-[15px] text-[#0A0A0A] truncate group-hover:underline underline-offset-4">
-            {item.title}
-          </h3>
-          <ArrowUpRight
-            className="w-4 h-4 text-neutral-400 group-hover:text-[#0A0A0A] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-150 shrink-0"
-            aria-hidden="true"
-          />
         </div>
       </button>
     </article>
@@ -221,7 +214,7 @@ function MobileSlideRow({
           type="button"
           onClick={() => stepBy(-1, true)}
           aria-label={`Previous sample in ${rowLabel}`}
-          className="absolute left-3 top-[calc(50%-18px)] -translate-y-1/2 z-10 w-11 h-11 flex items-center justify-center border border-neutral-300 bg-[#FAFAFA]/95 text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white hover:border-[#0A0A0A] active:scale-[0.95] transition-all duration-150 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A0A0A]"
+          className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-11 h-11 flex items-center justify-center border border-neutral-300 bg-[#FAFAFA]/95 text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white hover:border-[#0A0A0A] active:scale-[0.95] transition-all duration-150 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A0A0A]"
         >
           <ArrowLeft className="w-4 h-4" />
         </button>
@@ -230,7 +223,7 @@ function MobileSlideRow({
           type="button"
           onClick={() => stepBy(1, true)}
           aria-label={`Next sample in ${rowLabel}`}
-          className="absolute right-3 top-[calc(50%-18px)] -translate-y-1/2 z-10 w-11 h-11 flex items-center justify-center border border-neutral-300 bg-[#FAFAFA]/95 text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white hover:border-[#0A0A0A] active:scale-[0.95] transition-all duration-150 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A0A0A]"
+          className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-11 h-11 flex items-center justify-center border border-neutral-300 bg-[#FAFAFA]/95 text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white hover:border-[#0A0A0A] active:scale-[0.95] transition-all duration-150 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A0A0A]"
         >
           <ArrowRight className="w-4 h-4" />
         </button>
@@ -371,7 +364,7 @@ function AutoCarouselRow({
         type="button"
         onClick={() => nudge(-1)}
         aria-label={`Previous items in ${rowLabel}`}
-        className="w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center border border-neutral-300 bg-[#FAFAFA] text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white hover:border-[#0A0A0A] active:scale-[0.96] transition-all duration-150 cursor-pointer shrink-0 -mt-8 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A0A0A]"
+        className="w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center border border-neutral-300 bg-[#FAFAFA] text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white hover:border-[#0A0A0A] active:scale-[0.96] transition-all duration-150 cursor-pointer shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A0A0A]"
       >
         <ArrowLeft className="w-4 h-4" />
       </button>
@@ -397,7 +390,7 @@ function AutoCarouselRow({
         type="button"
         onClick={() => nudge(1)}
         aria-label={`Next items in ${rowLabel}`}
-        className="w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center border border-neutral-300 bg-[#FAFAFA] text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white hover:border-[#0A0A0A] active:scale-[0.96] transition-all duration-150 cursor-pointer shrink-0 -mt-8 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A0A0A]"
+        className="w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center border border-neutral-300 bg-[#FAFAFA] text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white hover:border-[#0A0A0A] active:scale-[0.96] transition-all duration-150 cursor-pointer shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A0A0A]"
       >
         <ArrowRight className="w-4 h-4" />
       </button>

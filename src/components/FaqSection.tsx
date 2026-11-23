@@ -16,15 +16,15 @@ const FAQ_ITEMS = [
   },
   {
     id: 'scheduling-community',
-    question: 'What is included when I hire a Social Media Manager VA?',
+    question: 'Can I customize which services are included?',
     answer:
-      'Everything needed to run your social media: content creation (copywriting, graphic design, video editing), content strategy and scheduling, plus daily community management like replying to comments and managing DMs.',
+      'Yes. You pick the exact social media management services you need—from copywriting, graphic design, and video editing to content strategy, scheduling, and community management—and we build your Social Media Manager VA quote around those inclusions.',
   },
   {
     id: 'why-better-than-freelancers',
     question: 'How is this better than hiring freelancers or a general VA?',
     answer:
-      'Hiring freelancers means paying multiple rates and managing four separate people. General VAs usually cannot design graphics, edit video, or write strong copy. With MONO DISTRICT., you hire one experienced Social Media Manager VA who covers all five disciplines—with agency creative backup included.',
+      'Hiring freelancers means paying multiple rates and managing four separate people. General VAs usually cannot design graphics, edit video, or write strong copy. With MONO DISTRICT., you hire one experienced Social Media Manager VA who covers the inclusions you need—with agency creative backup included.',
   },
   {
     id: 'turnaround-times',
@@ -40,9 +40,9 @@ const FAQ_ITEMS = [
   },
   {
     id: 'payment-terms',
-    question: 'How do pricing and billing work?',
+    question: 'How do pricing and quotes work?',
     answer:
-      'You pay one flat monthly rate to hire your dedicated Social Media Manager VA, billed upfront by card or bank transfer. There are no hidden fees, no extra charges for agency creative backup, and no long-term lock-in contracts.',
+      'Pricing depends on the social media management services you choose to include. You select the inclusions your business needs, and we provide a tailored monthly quote on your consultation—billed upfront via card or bank transfer with free agency creative backup and no long-term lock-in contracts.',
   },
   {
     id: 'ai-and-craft',
@@ -73,7 +73,7 @@ export function FaqSection({ onBookCall }: FaqSectionProps) {
               Frequently Asked Questions.
             </h2>
             <p className="text-base leading-[1.6] text-neutral-600 mb-6">
-              Clear answers on what’s included, free agency creative backup, turnaround times, and monthly pricing.
+              Clear answers on customizable inclusions, tailored quotes, free agency creative backup, and turnaround times.
             </p>
             <button
               type="button"

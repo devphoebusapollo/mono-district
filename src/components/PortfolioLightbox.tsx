@@ -84,7 +84,7 @@ export function PortfolioLightbox({
                   id="lightbox-title"
                   className="font-display font-semibold text-base sm:text-lg text-[#0A0A0A] truncate"
                 >
-                  {item.title}
+                  {item.mediaType === 'video' ? 'Reel & Video Ad' : 'Social Media Graphic'}
                 </h3>
               </div>
 
@@ -128,7 +128,9 @@ export function PortfolioLightbox({
                     transition={{ duration: 0.18, ease: EASE_EDITORIAL }}
                     className="w-full max-w-md aspect-square bg-neutral-200 border border-neutral-300 flex flex-col items-center justify-center p-8 text-center"
                   >
-                    <p className="font-display font-medium text-sm text-[#0A0A0A]">{item.title}</p>
+                    <p className="font-mono text-xs text-neutral-500">
+                      {item.mediaType === 'video' ? 'Reel & Video Ad' : 'Social Media Graphic'}
+                    </p>
                   </motion.div>
                 ) : item.mediaType === 'video' ? (
                   <motion.video
@@ -157,7 +159,7 @@ export function PortfolioLightbox({
                   <motion.img
                     key={item.id}
                     src={item.mediaUrl}
-                    alt={`${item.title} — social media creative sample`}
+                    alt="Social media graphic design sample"
                     referrerPolicy="no-referrer"
                     onError={() => setHasError(true)}
                     initial={{ opacity: 0, scale: 0.985 }}

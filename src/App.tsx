@@ -243,7 +243,7 @@ export default function App() {
                     What’s Included.
                   </h2>
                   <p className="text-sm sm:text-base leading-[1.6] text-neutral-600 max-w-xs">
-                    One Social Media Manager VA covers all five pillars of your social media—so you never have to hire multiple specialists.
+                    Pricing depends on the social media management services you need. Pick the inclusions that fit your business, and we&apos;ll give you a custom quote.
                   </p>
                 </EditorialReveal>
                 <div className="lg:col-span-8">
@@ -286,7 +286,7 @@ export default function App() {
                               onClick={() => openBriefModal(item.title)}
                               className="group inline-flex items-center gap-1.5 text-xs font-medium text-[#0A0A0A] hover:underline underline-offset-4 cursor-pointer whitespace-nowrap shrink-0 py-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A0A0A]"
                             >
-                              <span>Discuss {item.title}</span>
+                              <span>Request a quote</span>
                               <ArrowRight className="w-3.5 h-3.5 transition-transform duration-150 group-hover:translate-x-0.5" />
                             </button>
                           </div>
@@ -306,7 +306,7 @@ export default function App() {
           </section>
 
           {/* Portfolio: Selected Work */}
-          <PortfolioSection onBookCall={() => openBriefModal('Graphic Design')} />
+          <PortfolioSection onBookCall={() => openBriefModal()} />
 
           {/* Section 2: Simple By Design */}
           <section
@@ -394,7 +394,7 @@ export default function App() {
 
                     <div className="mt-12 pt-8 border-t border-neutral-200">
                       <p className="font-display font-semibold text-lg sm:text-xl text-[#0A0A0A]">
-                        One monthly fee. One person to talk to. Full creative support included.
+                        Tailored pricing based on your inclusions. One person to talk to. Full creative support included.
                       </p>
                     </div>
                   </EditorialReveal>

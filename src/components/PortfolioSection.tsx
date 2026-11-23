@@ -1,16 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
-import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
-import { PORTFOLIO_ITEMS, PortfolioItem } from '../data/portfolioItems';
+import { ArrowLeft, ArrowRight, ArrowUpRight, Play } from 'lucide-react';
+import { GRAPHIC_ITEMS, PORTFOLIO_ITEMS, PortfolioItem, VIDEO_ITEMS } from '../data/portfolioItems';
 import { EASE_EDITORIAL, EditorialReveal, HairlineRule } from './MotionPrimitives';
 import { PortfolioLightbox } from './PortfolioLightbox';
 
 interface PortfolioSectionProps {
   onBookCall: () => void;
 }
-
-const ROW_ONE_ITEMS = PORTFOLIO_ITEMS.slice(0, 12);
-const ROW_TWO_ITEMS = PORTFOLIO_ITEMS.slice(12);
 
 function useIsMobile() {
   const [isMobile, setIsMobile] = useState(() =>
@@ -32,12 +29,48 @@ function PortfolioTile({
   item,
   onClick,
   fullWidth = false,
+  paused = false,
+  aspectClassName = 'aspect-square',
 }: {
   item: PortfolioItem;
   onClick: () => void;
   fullWidth?: boolean;
+  paused?: boolean;
+  aspectClassName?: string;
 }) {
   const [hasError, setHasError] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    if (item.mediaType !== 'video') return;
+    const node = containerRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [item.mediaType]);
+
+  useEffect(() => {
+    if (item.mediaType !== 'video') return;
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isInView && !paused && !prefersReducedMotion) {
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  }, [item.mediaType, isInView, paused, prefersReducedMotion]);
 
   return (
     <article
@@ -50,16 +83,40 @@ function PortfolioTile({
         onClick={onClick}
         className="w-full text-left cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0A0A0A]"
       >
-        <div className="relative aspect-square w-full overflow-hidden bg-neutral-100 border border-neutral-200">
+        <div
+          ref={containerRef}
+          className={`relative ${aspectClassName} w-full overflow-hidden bg-neutral-100 border border-neutral-200`}
+        >
           {hasError ? (
             <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-neutral-100">
               <span className="font-display text-sm font-medium text-neutral-700">
                 {item.title}
               </span>
             </div>
+          ) : item.mediaType === 'video' ? (
+            <>
+              <video
+                ref={videoRef}
+                src={item.mediaUrl}
+                poster={item.posterUrl}
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-label={`${item.title} — social media reel preview`}
+                onError={() => setHasError(true)}
+                className="w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]"
+              />
+              <span
+                aria-hidden="true"
+                className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center bg-[#0A0A0A]/80 text-white border border-white/15"
+              >
+                <Play className="w-3.5 h-3.5 fill-current" />
+              </span>
+            </>
           ) : (
             <img
-              src={item.imageUrl}
+              src={item.mediaUrl}
               alt={`${item.title} — social media creative sample`}
               referrerPolicy="no-referrer"
               decoding="async"
@@ -89,6 +146,7 @@ function MobileSlideRow({
   globalOffset,
   intervalMs,
   externalPaused,
+  aspectClassName,
   onSelectItem,
 }: {
   items: readonly PortfolioItem[];
@@ -96,6 +154,7 @@ function MobileSlideRow({
   globalOffset: number;
   intervalMs: number;
   externalPaused: boolean;
+  aspectClassName?: string;
   onSelectItem: (globalIndex: number) => void;
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -150,6 +209,8 @@ function MobileSlideRow({
             <PortfolioTile
               item={activeItem}
               fullWidth
+              paused={externalPaused}
+              aspectClassName={aspectClassName}
               onClick={() => onSelectItem(globalOffset + activeIndex)}
             />
           </motion.div>
@@ -184,6 +245,7 @@ function AutoCarouselRow({
   globalOffset,
   speedPxPerSec,
   externalPaused,
+  aspectClassName,
   onSelectItem,
 }: {
   items: readonly PortfolioItem[];
@@ -191,6 +253,7 @@ function AutoCarouselRow({
   globalOffset: number;
   speedPxPerSec: number;
   externalPaused: boolean;
+  aspectClassName?: string;
   onSelectItem: (globalIndex: number) => void;
 }) {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -322,6 +385,8 @@ function AutoCarouselRow({
             <PortfolioTile
               key={`${item.id}-${idx < items.length ? 'a' : 'b'}`}
               item={item}
+              paused={externalPaused}
+              aspectClassName={aspectClassName}
               onClick={() => onSelectItem(globalOffset + (idx % items.length))}
             />
           ))}
@@ -358,51 +423,67 @@ export function PortfolioSection({ onBookCall }: PortfolioSectionProps) {
             Selected Work.
           </h2>
           <p className="text-base text-neutral-600">
-            Real social media graphics and campaign posts produced for client feeds.
+            Real social media graphics, reels, and video ads—showing the quality your Social Media Manager VA delivers.
           </p>
         </EditorialReveal>
 
-        {isMobile ? (
-          <div className="space-y-10">
-            <MobileSlideRow
-              items={ROW_ONE_ITEMS}
-              rowLabel="samples row 1"
-              globalOffset={0}
-              intervalMs={3600}
-              externalPaused={isLightboxOpen}
-              onSelectItem={setLightboxIndex}
-            />
+        <div className="space-y-14 sm:space-y-16">
+          <div>
+            <h3 className="font-display font-semibold text-lg sm:text-xl tracking-tight text-[#0A0A0A] mb-5">
+              Social Media Graphics
+            </h3>
 
-            <MobileSlideRow
-              items={ROW_TWO_ITEMS}
-              rowLabel="samples row 2"
-              globalOffset={ROW_ONE_ITEMS.length}
-              intervalMs={4200}
-              externalPaused={isLightboxOpen}
-              onSelectItem={setLightboxIndex}
-            />
+            {isMobile ? (
+              <MobileSlideRow
+                items={GRAPHIC_ITEMS}
+                rowLabel="social media graphics"
+                globalOffset={0}
+                intervalMs={3600}
+                externalPaused={isLightboxOpen}
+                aspectClassName="aspect-square"
+                onSelectItem={setLightboxIndex}
+              />
+            ) : (
+              <AutoCarouselRow
+                items={GRAPHIC_ITEMS}
+                rowLabel="social media graphics"
+                globalOffset={0}
+                speedPxPerSec={28}
+                externalPaused={isLightboxOpen}
+                aspectClassName="aspect-square"
+                onSelectItem={setLightboxIndex}
+              />
+            )}
           </div>
-        ) : (
-          <div className="space-y-12">
-            <AutoCarouselRow
-              items={ROW_ONE_ITEMS}
-              rowLabel="samples row 1"
-              globalOffset={0}
-              speedPxPerSec={28}
-              externalPaused={isLightboxOpen}
-              onSelectItem={setLightboxIndex}
-            />
 
-            <AutoCarouselRow
-              items={ROW_TWO_ITEMS}
-              rowLabel="samples row 2"
-              globalOffset={ROW_ONE_ITEMS.length}
-              speedPxPerSec={-24}
-              externalPaused={isLightboxOpen}
-              onSelectItem={setLightboxIndex}
-            />
+          <div className="pt-10 sm:pt-12 border-t border-neutral-200">
+            <h3 className="font-display font-semibold text-lg sm:text-xl tracking-tight text-[#0A0A0A] mb-5">
+              Reels &amp; Video Ads
+            </h3>
+
+            {isMobile ? (
+              <MobileSlideRow
+                items={VIDEO_ITEMS}
+                rowLabel="reels and video ads"
+                globalOffset={GRAPHIC_ITEMS.length}
+                intervalMs={4200}
+                externalPaused={isLightboxOpen}
+                aspectClassName="aspect-[4/5]"
+                onSelectItem={setLightboxIndex}
+              />
+            ) : (
+              <AutoCarouselRow
+                items={VIDEO_ITEMS}
+                rowLabel="reels and video ads"
+                globalOffset={GRAPHIC_ITEMS.length}
+                speedPxPerSec={-24}
+                externalPaused={isLightboxOpen}
+                aspectClassName="aspect-[4/5]"
+                onSelectItem={setLightboxIndex}
+              />
+            )}
           </div>
-        )}
+        </div>
       </div>
 
       <PortfolioLightbox

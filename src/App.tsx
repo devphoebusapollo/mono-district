@@ -13,47 +13,52 @@ const CRAFT_IMAGE = '/src/assets/images/editorial_craft_layouts_1794876731989.jp
 const CONTACT_IMAGE = '/src/assets/images/editorial_point_of_contact_1794876732893.jpg';
 const CLOSING_IMAGE = '/src/assets/images/editorial_closing_suite_1794876732812.jpg';
 
-const SERVICES = [
+const SMM_INCLUSIONS = [
+  {
+    title: 'Copywriting',
+    description:
+      'Hooks, captions, and post copy written to sound like your brand and turn views into leads.',
+  },
   {
     title: 'Graphic Design',
     description:
-      'Scroll-stopping social posts, carousels, and branded feed graphics designed to hold attention and keep your visual identity sharp.',
+      'Feed posts, carousels, and promo graphics designed to keep your pages sharp and consistent.',
   },
   {
     title: 'Video Editing',
     description:
-      'Short-form Reels, TikToks, and social video ads cut for strong pacing, clean captions, and higher viewer retention.',
+      'Reels, TikToks, and short-form video ads edited with clean cuts, captions, and pacing that holds attention.',
   },
   {
-    title: 'Caption Writing',
+    title: 'Content Strategy & Scheduling',
     description:
-      'Clear hooks, on-brand captions, and persuasive post copy crafted to spark engagement and turn attention into action.',
+      'Monthly content planning, clear topic pillars, and on-time scheduling so your pages never go quiet.',
   },
   {
-    title: 'Scheduling & Community',
+    title: 'Community Management',
     description:
-      'Optional calendar scheduling, publishing, and active community management—handling comments and DMs so your channels stay responsive.',
+      'Daily comment replies, audience engagement, and DM triage so followers and prospects get fast answers while you run your business.',
   },
 ] as const;
 
 const PROCESS_STEPS = [
   {
     number: '01',
-    title: 'Hand off the brief.',
+    title: 'Tell us what your brand needs.',
     description:
-      'Share your brand assets, channel goals, and creative needs once—without complex onboarding or endless spreadsheets.',
+      'Book a free consultation to share your goals, brand voice, and social channels.',
   },
   {
     number: '02',
-    title: 'One experienced VA runs the show.',
+    title: 'Get matched with one dedicated Social Media Manager VA.',
     description:
-      'Your dedicated virtual assistant—backed by years of social media management experience—coordinates our designers, video editors, and caption writers so you never have to.',
+      'We assign one experienced VA to handle your copywriting, graphic design, video editing, content strategy, scheduling, and community management.',
   },
   {
     number: '03',
-    title: 'Approve and stay live.',
+    title: 'Stay hands-off while your channels run.',
     description:
-      'Receive ready-to-post creatives in your inbox, or let us handle your content scheduling and day-to-day community management as well.',
+      'Review and approve posts in one place while your VA runs the calendar—and gets creative help from our agency behind the scenes at zero extra cost to you.',
   },
 ] as const;
 
@@ -87,10 +92,10 @@ export default function App() {
               className="hidden md:flex items-center gap-8 text-sm text-neutral-600"
             >
               <a
-                href="#what-we-do"
+                href="#capabilities"
                 className="hover:text-[#0A0A0A] hover:underline underline-offset-4 transition-colors duration-150 whitespace-nowrap shrink-0"
               >
-                What We Do
+                Your SMM
               </a>
               <a
                 href="#work"
@@ -144,11 +149,11 @@ export default function App() {
               >
                 <nav aria-label="Mobile navigation" className="flex flex-col space-y-3 text-base text-neutral-800">
                   <a
-                    href="#what-we-do"
+                    href="#capabilities"
                     onClick={() => setMobileMenuOpen(false)}
                     className="py-1.5 hover:text-[#0A0A0A]"
                   >
-                    What We Do
+                    Your SMM
                   </a>
                   <a
                     href="#work"
@@ -189,19 +194,19 @@ export default function App() {
           <section className="max-w-[1360px] mx-auto px-6 md:px-10 lg:px-12 pt-16 sm:pt-20 lg:pt-24 pb-16 lg:pb-24">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end pb-12 lg:pb-16">
               <EditorialReveal immediate y={10} className="lg:col-span-8">
-                <h1 className="font-display font-bold text-[clamp(2.5rem,5.2vw,4.75rem)] leading-[1.02] tracking-[-0.03em] text-[#0A0A0A] text-balance">
-                  Consistent social media,
+                <h1 className="font-display font-bold text-[clamp(2.35rem,4.7vw,4.45rem)] leading-[1.03] tracking-[-0.03em] text-[#0A0A0A] text-balance">
+                  Hire One Social Media Manager VA.
                   <br />
-                  without the management.
+                  Skip Hiring a Whole Team.
                 </h1>
               </EditorialReveal>
 
               <EditorialReveal immediate y={10} delay={0.08} className="lg:col-span-4 space-y-6">
                 <p className="text-base sm:text-[17px] leading-[1.6] text-neutral-700">
-                  Juggling separate designers, editors, writers, and posting schedules steals hours from your week—and still leaves your feed inconsistent.
+                  Hiring a separate copywriter, graphic designer, video editor, and scheduler costs a fortune—and leaves you managing four people every week.
                 </p>
                 <p className="text-sm leading-[1.6] text-neutral-500">
-                  MONO DISTRICT. is your social media management partner for graphic design, video editing, caption writing, scheduling, and community management—all led by one experienced virtual assistant.
+                  We give you one dedicated Social Media Manager VA who handles all of it, backed by our agency&apos;s creative team behind the scenes at zero extra cost to you.
                 </p>
                 <div className="pt-2">
                   <button
@@ -224,9 +229,9 @@ export default function App() {
             />
           </section>
 
-          {/* Section 1: What We Do */}
+          {/* Section 1: Included With Your SMM */}
           <section
-            id="what-we-do"
+            id="capabilities"
             className="max-w-[1360px] mx-auto px-6 md:px-10 lg:px-12"
           >
             <HairlineRule />
@@ -235,50 +240,59 @@ export default function App() {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-14 lg:mb-16">
                 <EditorialReveal className="lg:col-span-4 space-y-4">
                   <h2 className="font-display font-bold text-3xl sm:text-4xl tracking-[-0.025em] text-[#0A0A0A] text-balance">
-                    What We Do.
+                    What’s Included.
                   </h2>
                   <p className="text-sm sm:text-base leading-[1.6] text-neutral-600 max-w-xs">
-                    Every creative asset—plus optional scheduling and community management—built to keep your channels active and cohesive.
+                    One Social Media Manager VA covers all five pillars of your social media—so you never have to hire multiple specialists.
                   </p>
                 </EditorialReveal>
                 <div className="lg:col-span-8">
                   <div className="grid grid-cols-1 sm:grid-cols-2 border-t border-neutral-200">
-                    {SERVICES.map((service, index) => (
-                      <motion.article
-                        key={service.title}
-                        initial={{ opacity: 0, y: 14 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.15 }}
-                        transition={{
-                          duration: 0.45,
-                          delay: index * 0.08,
-                          ease: EASE_EDITORIAL,
-                        }}
-                        className={`py-8 sm:px-6 ${
-                          index % 2 === 0 ? 'sm:pl-0 sm:border-r sm:border-neutral-200' : 'sm:pr-0'
-                        } border-b border-neutral-200 flex flex-col justify-between`}
-                      >
-                        <div>
-                          <h3 className="font-display font-semibold text-xl tracking-tight text-[#0A0A0A] mb-3">
-                            {service.title}
-                          </h3>
-                          <p className="text-sm sm:text-[15px] leading-[1.6] text-neutral-600">
-                            {service.description}
-                          </p>
-                        </div>
+                    {SMM_INCLUSIONS.map((item, index) => {
+                      const isFullSpan = index === SMM_INCLUSIONS.length - 1;
+                      return (
+                        <motion.article
+                          key={item.title}
+                          initial={{ opacity: 0, y: 14 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true, amount: 0.15 }}
+                          transition={{
+                            duration: 0.45,
+                            delay: index * 0.08,
+                            ease: EASE_EDITORIAL,
+                          }}
+                          className={`py-8 border-b border-neutral-200 ${
+                            isFullSpan
+                              ? 'sm:col-span-2 flex flex-col sm:flex-row sm:items-end justify-between gap-6'
+                              : `sm:px-6 ${
+                                  index % 2 === 0
+                                    ? 'sm:pl-0 sm:border-r sm:border-neutral-200'
+                                    : 'sm:pr-0'
+                                } flex flex-col justify-between`
+                          }`}
+                        >
+                          <div className={isFullSpan ? 'max-w-xl' : undefined}>
+                            <h3 className="font-display font-semibold text-xl tracking-tight text-[#0A0A0A] mb-3">
+                              {item.title}
+                            </h3>
+                            <p className="text-sm sm:text-[15px] leading-[1.6] text-neutral-600">
+                              {item.description}
+                            </p>
+                          </div>
 
-                        <div className="mt-6">
-                          <button
-                            type="button"
-                            onClick={() => openBriefModal(service.title)}
-                            className="group inline-flex items-center gap-1.5 text-xs font-medium text-[#0A0A0A] hover:underline underline-offset-4 cursor-pointer whitespace-nowrap shrink-0 py-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A0A0A]"
-                          >
-                            <span>Discuss {service.title}</span>
-                            <ArrowRight className="w-3.5 h-3.5 transition-transform duration-150 group-hover:translate-x-0.5" />
-                          </button>
-                        </div>
-                      </motion.article>
-                    ))}
+                          <div className={isFullSpan ? 'shrink-0' : 'mt-6'}>
+                            <button
+                              type="button"
+                              onClick={() => openBriefModal(item.title)}
+                              className="group inline-flex items-center gap-1.5 text-xs font-medium text-[#0A0A0A] hover:underline underline-offset-4 cursor-pointer whitespace-nowrap shrink-0 py-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A0A0A]"
+                            >
+                              <span>Discuss {item.title}</span>
+                              <ArrowRight className="w-3.5 h-3.5 transition-transform duration-150 group-hover:translate-x-0.5" />
+                            </button>
+                          </div>
+                        </motion.article>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -305,10 +319,10 @@ export default function App() {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
                 <EditorialReveal className="lg:col-span-4 lg:sticky lg:top-24">
                   <h2 className="font-display font-bold text-3xl sm:text-4xl tracking-[-0.025em] text-[#0A0A0A] mb-4 text-balance">
-                    Simple By Design.
+                    How It Works.
                   </h2>
                   <p className="text-base sm:text-lg text-neutral-600">
-                    One partner. Zero creative bottlenecks.
+                    You hire one VA. We handle the rest.
                   </p>
                 </EditorialReveal>
 
@@ -362,25 +376,25 @@ export default function App() {
                   >
                     <div>
                       <h3 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl tracking-[-0.03em] leading-[1.06] text-[#0A0A0A] mb-6 text-balance">
-                        One Point of Contact.
+                        Why It Works Better.
                       </h3>
                       <p className="font-display font-medium text-xl sm:text-2xl tracking-tight text-neutral-800 mb-10">
-                        One seasoned virtual assistant. Every moving part.
+                        Your VA does the work. Our agency backs them up for free.
                       </p>
 
                       <div className="space-y-6 text-base sm:text-[17px] leading-[1.7] text-neutral-600 max-w-lg">
                         <p>
-                          Most brands burn out chasing a separate graphic designer, video editor, caption writer, and scheduler—repeating the same feedback four times while deadlines slip.
+                          Most business owners get stuck choosing between expensive agency retainers, chasing four separate freelancers, or hiring a general VA who can&apos;t design, edit video, or write strong copy.
                         </p>
                         <p>
-                          With MONO DISTRICT., you only talk to one person. Backed by years of hands-on social media experience, your dedicated virtual assistant manages and coordinates the entire creative team, quality control, timelines, and optional scheduling or community management behind the scenes.
+                          With MONO DISTRICT., you hire one dedicated Social Media Manager VA who handles your copywriting, graphics, video edits, strategy, scheduling, and community replies. Whenever workloads spike or a campaign needs extra creative work, our agency assists your VA behind the scenes—you don&apos;t pay extra for those creatives, never manage them, and don&apos;t have to worry about a thing.
                         </p>
                       </div>
                     </div>
 
                     <div className="mt-12 pt-8 border-t border-neutral-200">
                       <p className="font-display font-semibold text-lg sm:text-xl text-[#0A0A0A]">
-                        You run your business. One experienced virtual assistant runs your social presence.
+                        One monthly fee. One person to talk to. Full creative support included.
                       </p>
                     </div>
                   </EditorialReveal>
@@ -405,18 +419,18 @@ export default function App() {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end">
                 <EditorialReveal className="lg:col-span-7">
                   <h2 className="font-display font-bold text-[clamp(2.25rem,4.5vw,4rem)] leading-[1.04] tracking-[-0.03em] text-white text-balance">
-                    Less Management.
+                    One VA Hire.
                     <br />
-                    More Creating.
+                    Nothing Left to Worry About.
                   </h2>
                 </EditorialReveal>
 
                 <EditorialReveal delay={0.08} className="lg:col-span-5 space-y-6">
                   <p className="text-base sm:text-[17px] leading-[1.65] text-neutral-300">
-                    Stop spending your week managing freelancers and patching together content calendars. Get graphic design, video editing, caption writing, and optional scheduling and community management—coordinated by one experienced virtual assistant.
+                    Stop juggling freelancers or wondering what to post next. Hire one dedicated Social Media Manager VA for copywriting, graphic design, video editing, content strategy, scheduling, and community management—with agency creative backup included at zero extra cost.
                   </p>
                   <p className="font-display font-medium text-lg text-white">
-                    One person to talk to. Everything delivered.
+                    Book a free consultation and meet your VA.
                   </p>
                   <div className="pt-2">
                     <button
@@ -447,7 +461,7 @@ export default function App() {
               </div>
 
               <p className="text-sm text-neutral-400">
-                Social media management &amp; creatives, led by one virtual assistant.
+                Social Media Manager VA Agency — Full Content, Strategy, Scheduling &amp; Community.
               </p>
 
               <a

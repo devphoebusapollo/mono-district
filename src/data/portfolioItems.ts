@@ -1,232 +1,311 @@
-export type PortfolioCategory =
-  | 'Food & Beverage'
-  | 'Beauty & Wellness'
-  | 'Real Estate'
-  | 'Business & Retail';
-
 export interface PortfolioItem {
   id: string;
-  index: string;
   title: string;
-  category: PortfolioCategory;
-  discipline: string;
-  imageUrl: string;
+  mediaType: 'image' | 'video';
+  mediaUrl: string;
+  posterUrl?: string;
 }
 
-export const PORTFOLIO_CATEGORIES: readonly ('All' | PortfolioCategory)[] = [
-  'All',
-  'Food & Beverage',
-  'Beauty & Wellness',
-  'Real Estate',
-  'Business & Retail',
-] as const;
+const videoPoster = (mp4Url: string) => mp4Url.replace(/\.mp4$/i, '.jpg');
 
-export const PORTFOLIO_ITEMS: readonly PortfolioItem[] = [
+export const GRAPHIC_ITEMS: readonly PortfolioItem[] = [
   {
     id: 'stevi-bs-thirsty-thursday',
-    index: '01',
     title: "Thirsty Thursday at Stevi B's",
-    category: 'Food & Beverage',
-    discipline: 'Social Media Post',
-    imageUrl:
+    mediaType: 'image',
+    mediaUrl:
       'https://res.cloudinary.com/a8efvgn2/image/upload/v1795131191/Thirsty_Thursday_at_SteviB_s_Pizza_Buffet.png',
   },
   {
     id: 'sunnutrient-sleep-cream',
-    index: '02',
     title: 'SunNutrient Radiant Sleep',
-    category: 'Beauty & Wellness',
-    discipline: 'Social Media Post',
-    imageUrl:
+    mediaType: 'image',
+    mediaUrl:
       'https://res.cloudinary.com/a8efvgn2/image/upload/v1795131191/SunNutrient_Radiant_Sleep_Night_Cream.png',
   },
   {
     id: 'self-funding-property-portfolio',
-    index: '03',
     title: 'Self-Funding Property Portfolio',
-    category: 'Real Estate',
-    discipline: 'Social Media Post',
-    imageUrl:
+    mediaType: 'image',
+    mediaUrl:
       'https://res.cloudinary.com/a8efvgn2/image/upload/v1795131190/Self-Funding_Property_Portfolio_Benefits.png',
   },
   {
     id: 'jordan-21-sneaker-poster',
-    index: '04',
     title: 'Limited Edition Jordan 21',
-    category: 'Business & Retail',
-    discipline: 'Social Media Post',
-    imageUrl:
+    mediaType: 'image',
+    mediaUrl:
       'https://res.cloudinary.com/a8efvgn2/image/upload/v1795131189/Limited_Edition_Jordan_21_Sneaker_Poster.png',
   },
   {
     id: 'luxury-microchanneling-offer',
-    index: '05',
     title: 'Luxury Microchanneling Offer',
-    category: 'Beauty & Wellness',
-    discipline: 'Social Media Post',
-    imageUrl:
+    mediaType: 'image',
+    mediaUrl:
       'https://res.cloudinary.com/a8efvgn2/image/upload/v1795131189/Luxury_Microchanneling_Special_Offer.png',
   },
   {
     id: 'goggles-pizza-sip',
-    index: '06',
     title: 'Goggles Pizza & Refreshing Sip',
-    category: 'Food & Beverage',
-    discipline: 'Social Media Post',
-    imageUrl:
+    mediaType: 'image',
+    mediaUrl:
       'https://res.cloudinary.com/a8efvgn2/image/upload/v1795131189/Goggles_Pizza_and_a_Refreshing_Sip.png',
   },
   {
     id: 'what-is-a-totaled-car',
-    index: '07',
     title: 'What Is a Totaled Car?',
-    category: 'Business & Retail',
-    discipline: 'Social Media Post',
-    imageUrl:
+    mediaType: 'image',
+    mediaUrl:
       'https://res.cloudinary.com/a8efvgn2/image/upload/v1795131191/What_Is_a_Totaled_Car_.png',
   },
   {
     id: 'property-appraisal-graphic',
-    index: '08',
     title: 'Property Appraisal Graphic',
-    category: 'Real Estate',
-    discipline: 'Social Media Post',
-    imageUrl:
+    mediaType: 'image',
+    mediaUrl:
       'https://res.cloudinary.com/a8efvgn2/image/upload/v1795131190/Property_Appraisal_House_Model_Graphic.png',
   },
   {
     id: 'new-year-weight-loss-journey',
-    index: '09',
     title: 'New Year Weight Loss Journey',
-    category: 'Beauty & Wellness',
-    discipline: 'Social Media Post',
-    imageUrl:
+    mediaType: 'image',
+    mediaUrl:
       'https://res.cloudinary.com/a8efvgn2/image/upload/v1795131191/New_Year_New_Weight_Loss_Journey.png',
   },
   {
     id: 'monopoly-mastermind-membership',
-    index: '10',
     title: 'Monopoly Mastermind Membership',
-    category: 'Business & Retail',
-    discipline: 'Social Media Post',
-    imageUrl:
+    mediaType: 'image',
+    mediaUrl:
       'https://res.cloudinary.com/a8efvgn2/image/upload/v1795131190/Monopoly_Mastermind_Trading_Membership_Poster.png',
   },
   {
     id: 'national-anti-boredom-month',
-    index: '11',
     title: 'National Anti-Boredom Month',
-    category: 'Business & Retail',
-    discipline: 'Social Media Post',
-    imageUrl:
+    mediaType: 'image',
+    mediaUrl:
       'https://res.cloudinary.com/a8efvgn2/image/upload/v1795131190/National_Anti-Boredom_Month_at_Destin_Chamber.png',
   },
   {
     id: 'marketing-monday-illustration',
-    index: '12',
     title: 'Marketing Monday Feature',
-    category: 'Business & Retail',
-    discipline: 'Social Media Post',
-    imageUrl:
+    mediaType: 'image',
+    mediaUrl:
       'https://res.cloudinary.com/a8efvgn2/image/upload/v1795131190/Marketing_Monday_Team_Illustration.png',
   },
   {
     id: 'grow-with-us-academy',
-    index: '13',
     title: 'Grow With Us Academy',
-    category: 'Business & Retail',
-    discipline: 'Social Media Post',
-    imageUrl:
+    mediaType: 'image',
+    mediaUrl:
       'https://res.cloudinary.com/a8efvgn2/image/upload/v1795131189/Grow_With_Us_Academy_Poster.png',
   },
   {
     id: 'laser-genesis-skincare',
-    index: '14',
     title: 'Laser Genesis Skincare',
-    category: 'Beauty & Wellness',
-    discipline: 'Social Media Post',
-    imageUrl:
+    mediaType: 'image',
+    mediaUrl:
       'https://res.cloudinary.com/a8efvgn2/image/upload/v1795131189/Laser_Genesis_Skincare_Promotion.png',
   },
   {
     id: 'generational-rental-living',
-    index: '15',
     title: 'Generational Rental Living Guide',
-    category: 'Real Estate',
-    discipline: 'Social Media Post',
-    imageUrl:
+    mediaType: 'image',
+    mediaUrl:
       'https://res.cloudinary.com/a8efvgn2/image/upload/v1795131189/Generational_Rental_Living_Guide.png',
   },
   {
     id: 'childhood-hobbies',
-    index: '16',
     title: 'Explore Childhood Hobbies',
-    category: 'Beauty & Wellness',
-    discipline: 'Social Media Post',
-    imageUrl:
+    mediaType: 'image',
+    mediaUrl:
       'https://res.cloudinary.com/a8efvgn2/image/upload/v1795131188/Five_Reasons_to_Explore_Childhood_Hobbies.png',
   },
   {
     id: 'deck-fence-washing',
-    index: '17',
     title: 'Deck & Fence Washing Services',
-    category: 'Real Estate',
-    discipline: 'Social Media Post',
-    imageUrl:
+    mediaType: 'image',
+    mediaUrl:
       'https://res.cloudinary.com/a8efvgn2/image/upload/v1795131188/Deck_Fence_Washing_Services.png',
   },
   {
     id: 'bogo-wraps',
-    index: '18',
     title: 'Buy One Get One Free Wraps',
-    category: 'Food & Beverage',
-    discipline: 'Social Media Post',
-    imageUrl:
+    mediaType: 'image',
+    mediaUrl:
       'https://res.cloudinary.com/a8efvgn2/image/upload/v1795131188/Buy_One_Get_One_Free_Wraps.png',
   },
   {
     id: 'high-intensity-fitness',
-    index: '19',
     title: 'High-Intensity Fitness Poster',
-    category: 'Beauty & Wellness',
-    discipline: 'Social Media Post',
-    imageUrl:
+    mediaType: 'image',
+    mediaUrl:
       'https://res.cloudinary.com/a8efvgn2/image/upload/v1795131188/High-Intensity_Fitness_Workout_Poster.png',
   },
   {
     id: 'apple-crumble-pancake-latte',
-    index: '20',
     title: 'Apple Crumble Pancake Latte',
-    category: 'Food & Beverage',
-    discipline: 'Social Media Post',
-    imageUrl:
+    mediaType: 'image',
+    mediaUrl:
       'https://res.cloudinary.com/a8efvgn2/image/upload/v1795131188/Cozy_Apple_Crumble_Pancake_Latte_Offer.png',
   },
   {
     id: 'higdon-group-training',
-    index: '21',
     title: 'Higdon Group Training Ad',
-    category: 'Business & Retail',
-    discipline: 'Social Media Post',
-    imageUrl:
+    mediaType: 'image',
+    mediaUrl:
       'https://res.cloudinary.com/a8efvgn2/image/upload/v1795131188/Higdon_Group_Free_Training_Ad.png',
   },
   {
     id: 'white-heron-rental-listing',
-    index: '22',
     title: '79 White Heron Drive Listing',
-    category: 'Real Estate',
-    discipline: 'Social Media Post',
-    imageUrl:
+    mediaType: 'image',
+    mediaUrl:
       'https://res.cloudinary.com/a8efvgn2/image/upload/v1795131187/79_White_Heron_Drive_Rental_Listing.png',
   },
   {
     id: 'hair-confidence-special-offer',
-    index: '23',
     title: 'Hair Confidence Special Offer',
-    category: 'Beauty & Wellness',
-    discipline: 'Social Media Post',
-    imageUrl:
+    mediaType: 'image',
+    mediaUrl:
       'https://res.cloudinary.com/a8efvgn2/image/upload/v1795131187/Hair_Confidence_Special_Offer.png',
   },
+] as const;
+
+export const VIDEO_ITEMS: readonly PortfolioItem[] = [
+  {
+    id: 'beently-20s-video-ad',
+    title: 'Beently 20s Video Ad',
+    mediaType: 'video',
+    mediaUrl:
+      'https://res.cloudinary.com/a8efvgn2/video/upload/v1795470835/20secs_-_Beently_Reel_-_V2.mp4',
+    posterUrl: videoPoster(
+      'https://res.cloudinary.com/a8efvgn2/video/upload/v1795470835/20secs_-_Beently_Reel_-_V2.mp4'
+    ),
+  },
+  {
+    id: 'sapora-bts-reel',
+    title: 'Sapora Shoot Behind the Scenes',
+    mediaType: 'video',
+    mediaUrl:
+      'https://res.cloudinary.com/a8efvgn2/video/upload/v1795470801/Behind_the_scenes_of_a_project_we_worked_on_with_sapora_Everything_about_the_shoot_was_just_per.mp4',
+    posterUrl: videoPoster(
+      'https://res.cloudinary.com/a8efvgn2/video/upload/v1795470801/Behind_the_scenes_of_a_project_we_worked_on_with_sapora_Everything_about_the_shoot_was_just_per.mp4'
+    ),
+  },
+  {
+    id: 'dubai-morning-coffee-reel',
+    title: 'Dubai Morning Coffee Reel',
+    mediaType: 'video',
+    mediaUrl:
+      'https://res.cloudinary.com/a8efvgn2/video/upload/v1795470675/Start_your_day_with_your_fave_Coffee_coffeelover_dubai_contentcreator.mp4',
+    posterUrl: videoPoster(
+      'https://res.cloudinary.com/a8efvgn2/video/upload/v1795470675/Start_your_day_with_your_fave_Coffee_coffeelover_dubai_contentcreator.mp4'
+    ),
+  },
+  {
+    id: 'peaceful-scripture-reel',
+    title: 'Peaceful Scripture Reflections',
+    mediaType: 'video',
+    mediaUrl:
+      'https://res.cloudinary.com/a8efvgn2/video/upload/v1795471758/From_Klickpin.com-_Peaceful_scripture_reflections_and_clever_inspiration_for_daily_inspiration_with_grace_and_hope-pin-id-548524429634986849.mp4',
+    posterUrl: videoPoster(
+      'https://res.cloudinary.com/a8efvgn2/video/upload/v1795471758/From_Klickpin.com-_Peaceful_scripture_reflections_and_clever_inspiration_for_daily_inspiration_with_grace_and_hope-pin-id-548524429634986849.mp4'
+    ),
+  },
+  {
+    id: 'modern-morning-routine-reel',
+    title: 'Intentional Morning Routine',
+    mediaType: 'video',
+    mediaUrl:
+      'https://res.cloudinary.com/a8efvgn2/video/upload/v1795471551/From_Klickpin.com-_Modern_productive_morning_routine_ideas_that_make_everyday_moments_look_more_intentional_memorable_and_beautifully_styled_for_w.mp4',
+    posterUrl: videoPoster(
+      'https://res.cloudinary.com/a8efvgn2/video/upload/v1795471551/From_Klickpin.com-_Modern_productive_morning_routine_ideas_that_make_everyday_moments_look_more_intentional_memorable_and_beautifully_styled_for_w.mp4'
+    ),
+  },
+  {
+    id: 'unique-travel-packing-reel',
+    title: '24 Travel Packing Tips',
+    mediaType: 'video',
+    mediaUrl:
+      'https://res.cloudinary.com/a8efvgn2/video/upload/v1795471385/From_Klickpin.com-_Explore_these_24_Unique_travel_packing_tips_that_are_trending_right_now_and_still_timeless_enough_to_save_for_later_for_beginne.mp4',
+    posterUrl: videoPoster(
+      'https://res.cloudinary.com/a8efvgn2/video/upload/v1795471385/From_Klickpin.com-_Explore_these_24_Unique_travel_packing_tips_that_are_trending_right_now_and_still_timeless_enough_to_save_for_later_for_beginne.mp4'
+    ),
+  },
+  {
+    id: 'luxury-travel-packing-reel',
+    title: 'Luxury Travel Packing Guide',
+    mediaType: 'video',
+    mediaUrl:
+      'https://res.cloudinary.com/a8efvgn2/video/upload/v1795471225/From_Klickpin.com-_23_Luxury_travel_packing_tips_that_help_you_create_a_polished_look_with_very_simple_and_affordable_details_for_anyone_who_wants.mp4',
+    posterUrl: videoPoster(
+      'https://res.cloudinary.com/a8efvgn2/video/upload/v1795471225/From_Klickpin.com-_23_Luxury_travel_packing_tips_that_help_you_create_a_polished_look_with_very_simple_and_affordable_details_for_anyone_who_wants.mp4'
+    ),
+  },
+  {
+    id: 'fresh-manicure-ideas-reel',
+    title: 'Fresh Manicure Ideas',
+    mediaType: 'video',
+    mediaUrl:
+      'https://res.cloudinary.com/a8efvgn2/video/upload/v1795471136/From_Klickpin.com-_Pin_this_guide_to_beautiful_fresh_manicure_ideas_that_help_you_get_the_look_without_the_stress_with_smart_steps_cute_details_an.mp4',
+    posterUrl: videoPoster(
+      'https://res.cloudinary.com/a8efvgn2/video/upload/v1795471136/From_Klickpin.com-_Pin_this_guide_to_beautiful_fresh_manicure_ideas_that_help_you_get_the_look_without_the_stress_with_smart_steps_cute_details_an.mp4'
+    ),
+  },
+  {
+    id: 'clean-girl-makeup-reel',
+    title: 'Clean Girl Makeup Edit',
+    mediaType: 'video',
+    mediaUrl:
+      'https://res.cloudinary.com/a8efvgn2/video/upload/v1795471059/From_Klickpin.com-_Clean_girl_makeup_ideas_that_instantly_upgrade_your_space_style_or_celebration_without_much_effort_for_beginners_who_want_impre.mp4',
+    posterUrl: videoPoster(
+      'https://res.cloudinary.com/a8efvgn2/video/upload/v1795471059/From_Klickpin.com-_Clean_girl_makeup_ideas_that_instantly_upgrade_your_space_style_or_celebration_without_much_effort_for_beginners_who_want_impre.mp4'
+    ),
+  },
+  {
+    id: 'salty-shell-style-1-reel',
+    title: 'Salty Shell-Toned Style I',
+    mediaType: 'video',
+    mediaUrl:
+      'https://res.cloudinary.com/a8efvgn2/video/upload/v1795470927/From_Klickpin.com-_Salty_shell-toned_style_ideas_made_for_cozy_stylish_inspiration_with_timeless_style_to_brighten_you-pin-id-1086986060079822211.mp4',
+    posterUrl: videoPoster(
+      'https://res.cloudinary.com/a8efvgn2/video/upload/v1795470927/From_Klickpin.com-_Salty_shell-toned_style_ideas_made_for_cozy_stylish_inspiration_with_timeless_style_to_brighten_you-pin-id-1086986060079822211.mp4'
+    ),
+  },
+  {
+    id: 'salty-shell-style-2-reel',
+    title: 'Salty Shell-Toned Style II',
+    mediaType: 'video',
+    mediaUrl:
+      'https://res.cloudinary.com/a8efvgn2/video/upload/v1795470673/From_Klickpin.com-_Salty_shell-toned_style_ideas_made_for_cozy_stylish_inspiration_with_timeless_style_to_brighten_you-pin-id-686869380717716614.mp4',
+    posterUrl: videoPoster(
+      'https://res.cloudinary.com/a8efvgn2/video/upload/v1795470673/From_Klickpin.com-_Salty_shell-toned_style_ideas_made_for_cozy_stylish_inspiration_with_timeless_style_to_brighten_you-pin-id-686869380717716614.mp4'
+    ),
+  },
+  {
+    id: 'salty-shell-style-3-reel',
+    title: 'Salty Shell-Toned Style III',
+    mediaType: 'video',
+    mediaUrl:
+      'https://res.cloudinary.com/a8efvgn2/video/upload/v1795470668/From_Klickpin.com-_Salty_shell-toned_style_ideas_made_for_cozy_stylish_inspiration_with_timeless_style_to_brighten_you-pin-id-692569248990846727.mp4',
+    posterUrl: videoPoster(
+      'https://res.cloudinary.com/a8efvgn2/video/upload/v1795470668/From_Klickpin.com-_Salty_shell-toned_style_ideas_made_for_cozy_stylish_inspiration_with_timeless_style_to_brighten_you-pin-id-692569248990846727.mp4'
+    ),
+  },
+  {
+    id: 'journaling-prompts-reel',
+    title: '34 Journaling Prompts',
+    mediaType: 'video',
+    mediaUrl:
+      'https://res.cloudinary.com/a8efvgn2/video/upload/v1795470663/From_Klickpin.com-_34_Journaling_Prompts_That_Actually_Work-pin-id-877920521130797010.mp4',
+    posterUrl: videoPoster(
+      'https://res.cloudinary.com/a8efvgn2/video/upload/v1795470663/From_Klickpin.com-_34_Journaling_Prompts_That_Actually_Work-pin-id-877920521130797010.mp4'
+    ),
+  },
+] as const;
+
+export const PORTFOLIO_ITEMS: readonly PortfolioItem[] = [
+  ...GRAPHIC_ITEMS,
+  ...VIDEO_ITEMS,
 ] as const;

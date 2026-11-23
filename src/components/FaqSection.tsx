@@ -9,46 +9,46 @@ interface FaqSectionProps {
 
 const FAQ_ITEMS = [
   {
-    id: 'turnaround-times',
-    question: 'What are your typical turnaround times?',
+    id: 'agency-creative-support',
+    question: 'How does the free agency creative support work?',
     answer:
-      'Static social media graphics and caption drafts are typically delivered within 24 to 48 business hours. Short-form video edits (Reels, TikToks, and social ads) are delivered within 2 to 3 business days depending on scope, with every deadline tracked and coordinated by your virtual assistant.',
+      'Your dedicated Social Media Manager VA handles your daily copywriting, graphic design, video editing, strategy, scheduling, and community management. If your brand ever needs extra design or video editing help, our agency assists your VA behind the scenes. You never pay extra for it and never manage those creatives.',
   },
   {
     id: 'scheduling-community',
-    question: 'Do you also handle post scheduling and community management?',
+    question: 'What is included when I hire a Social Media Manager VA?',
     answer:
-      'Yes—when you need more than standalone assets, your virtual assistant can schedule and publish approved posts across your social calendar and handle day-to-day community management, including comment replies and inbox triage.',
+      'Everything needed to run your social media: content creation (copywriting, graphic design, video editing), content strategy and scheduling, plus daily community management like replying to comments and managing DMs.',
+  },
+  {
+    id: 'why-better-than-freelancers',
+    question: 'How is this better than hiring freelancers or a general VA?',
+    answer:
+      'Hiring freelancers means paying multiple rates and managing four separate people. General VAs usually cannot design graphics, edit video, or write strong copy. With MONO DISTRICT., you hire one experienced Social Media Manager VA who covers all five disciplines—with agency creative backup included.',
+  },
+  {
+    id: 'turnaround-times',
+    question: 'How fast will my VA deliver posts and videos?',
+    answer:
+      'Static graphics and copywriting are typically delivered within 24 to 48 business hours. Short-form videos (Reels, TikToks, video ads) take 2 to 3 business days—keeping your posting calendar consistently ahead.',
   },
   {
     id: 'collaboration-tools',
-    question: 'What collaboration tools do you use for briefs, assets, and feedback?',
+    question: 'What tools do we use to share files and feedback?',
     answer:
-      'We fit directly into your existing workflow so there is no new software to learn. Share brand guidelines, raw footage, and feedback via Google Drive, Dropbox, Frame.io, or Notion—and communicate with your dedicated virtual assistant over email or Slack.',
-  },
-  {
-    id: 'revisions-approvals',
-    question: 'How do revisions and approvals work?',
-    answer:
-      'Every deliverable includes structured revision rounds managed in one thread by your virtual assistant. Send consolidated notes or timestamped video edits to one person, and they coordinate changes across our designers, editors, and writers until everything is ready.',
+      'No new software to learn. Share brand files, raw clips, and approvals via Google Drive, Dropbox, Frame.io, or Notion, and message your VA directly on Slack or email.',
   },
   {
     id: 'payment-terms',
-    question: 'What are your payment terms and billing options?',
+    question: 'How do pricing and billing work?',
     answer:
-      'We offer straightforward monthly retainers for ongoing social media management and creative production, as well as fixed-scope project packages. Invoices are billed upfront via card or bank transfer with clear scope—no hidden fees or long-term lock-in contracts.',
-  },
-  {
-    id: 'virtual-assistant-point',
-    question: 'Who will I actually be talking to every day?',
-    answer:
-      'You only talk to one seasoned virtual assistant with years of social media management experience. Instead of you chasing separate graphic designers, video editors, and caption writers, your virtual assistant manages the entire team, schedule, and delivery queue for you.',
+      'You pay one flat monthly rate to hire your dedicated Social Media Manager VA, billed upfront by card or bank transfer. There are no hidden fees, no extra charges for agency creative backup, and no long-term lock-in contracts.',
   },
   {
     id: 'ai-and-craft',
-    question: 'Do you use AI to create your designs or artworks?',
+    question: 'Do you use AI to create designs or artworks?',
     answer:
-      'No. Every graphic, video edit, and piece of visual artwork is crafted by real human creatives on our team. We use AI only behind the scenes for workflow efficiency—such as organizing briefs, transcription, and internal coordination—never to generate your artworks.',
+      'No. All graphics, videos, and captions are crafted by real people—never AI-generated artwork. We only use AI internally for workflow efficiency like organizing briefs, transcription, and research.',
   },
 ] as const;
 
@@ -73,7 +73,7 @@ export function FaqSection({ onBookCall }: FaqSectionProps) {
               Frequently Asked Questions.
             </h2>
             <p className="text-base leading-[1.6] text-neutral-600 mb-6">
-              Clear answers on turnaround times, scheduling and community support, collaboration tools, and payment terms.
+              Clear answers on what’s included, free agency creative backup, turnaround times, and monthly pricing.
             </p>
             <button
               type="button"

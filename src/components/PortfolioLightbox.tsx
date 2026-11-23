@@ -116,7 +116,7 @@ export function PortfolioLightbox({
               </div>
             </div>
 
-            {/* Artwork canvas */}
+            {/* Artwork / Video canvas */}
             <div className="flex-1 bg-neutral-100 flex items-center justify-center p-4 sm:p-8 overflow-auto">
               <AnimatePresence mode="wait">
                 {hasError ? (
@@ -130,10 +130,33 @@ export function PortfolioLightbox({
                   >
                     <p className="font-display font-medium text-sm text-[#0A0A0A]">{item.title}</p>
                   </motion.div>
+                ) : item.mediaType === 'video' ? (
+                  <motion.video
+                    key={item.id}
+                    src={item.mediaUrl}
+                    poster={item.posterUrl}
+                    controls
+                    playsInline
+                    loop
+                    autoPlay
+                    onLoadedMetadata={(e) => {
+                      const video = e.currentTarget;
+                      video.play().catch(() => {
+                        video.muted = true;
+                        video.play().catch(() => {});
+                      });
+                    }}
+                    onError={() => setHasError(true)}
+                    initial={{ opacity: 0, scale: 0.985 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.985 }}
+                    transition={{ duration: 0.2, ease: EASE_EDITORIAL }}
+                    className="max-h-[65vh] w-auto max-w-full object-contain border border-neutral-200 bg-black"
+                  />
                 ) : (
                   <motion.img
                     key={item.id}
-                    src={item.imageUrl}
+                    src={item.mediaUrl}
                     alt={`${item.title} — social media creative sample`}
                     referrerPolicy="no-referrer"
                     onError={() => setHasError(true)}

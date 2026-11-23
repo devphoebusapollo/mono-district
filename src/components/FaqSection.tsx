@@ -44,6 +44,12 @@ const FAQ_ITEMS = [
     answer:
       'You only talk to one seasoned virtual assistant with years of social media management experience. Instead of you chasing separate graphic designers, video editors, and caption writers, your virtual assistant manages the entire team, schedule, and delivery queue for you.',
   },
+  {
+    id: 'ai-and-craft',
+    question: 'Do you use AI to create your designs or artworks?',
+    answer:
+      'No. Every graphic, video edit, and piece of visual artwork is crafted by real human creatives on our team. We use AI only behind the scenes for workflow efficiency—such as organizing briefs, transcription, and internal coordination—never to generate your artworks.',
+  },
 ] as const;
 
 export function FaqSection({ onBookCall }: FaqSectionProps) {

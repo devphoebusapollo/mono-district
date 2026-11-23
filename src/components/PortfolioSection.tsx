@@ -358,7 +358,7 @@ export function PortfolioSection({ onBookCall }: PortfolioSectionProps) {
             Selected Work.
           </h2>
           <p className="text-base text-neutral-600">
-            Real social media creatives produced for client feeds and campaigns.
+            Real social media graphics and campaign posts produced for client feeds.
           </p>
         </EditorialReveal>
 

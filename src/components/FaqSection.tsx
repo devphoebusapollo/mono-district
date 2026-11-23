@@ -12,37 +12,37 @@ const FAQ_ITEMS = [
     id: 'turnaround-times',
     question: 'What are your typical turnaround times?',
     answer:
-      'Static social media graphics and copywriting drafts are typically delivered within 24 to 48 business hours. Short-form video edits (Reels, TikToks, and paid social ads) are delivered within 2 to 3 business days depending on length and complexity, with priority schedules coordinated directly through your account manager.',
+      'Static social media graphics and caption drafts are typically delivered within 24 to 48 business hours. Short-form video edits (Reels, TikToks, and social ads) are delivered within 2 to 3 business days depending on scope, with every deadline tracked and coordinated by your virtual assistant.',
+  },
+  {
+    id: 'scheduling-community',
+    question: 'Do you also handle post scheduling and community management?',
+    answer:
+      'Yes—when you need more than standalone assets, your virtual assistant can schedule and publish approved posts across your social calendar and handle day-to-day community management, including comment replies and inbox triage.',
   },
   {
     id: 'collaboration-tools',
     question: 'What collaboration tools do you use for briefs, assets, and feedback?',
     answer:
-      'We adapt to the tools your team already uses so there is no extra software to learn. You can share briefs, brand guidelines, and raw footage through Google Drive, Dropbox, Frame.io, or Notion, and communicate day-to-day with your dedicated account manager via email or Slack.',
+      'We fit directly into your existing workflow so there is no new software to learn. Share brand guidelines, raw footage, and feedback via Google Drive, Dropbox, Frame.io, or Notion—and communicate with your dedicated virtual assistant over email or Slack.',
   },
   {
     id: 'revisions-approvals',
-    question: 'How do revisions and creative approvals work?',
+    question: 'How do revisions and approvals work?',
     answer:
-      'Every deliverable includes structured revision rounds managed in one thread by your account manager. Simply share consolidated notes or timestamped video feedback, and our creative team turns around updates promptly until every asset is ready to publish.',
+      'Every deliverable includes structured revision rounds managed in one thread by your virtual assistant. Send consolidated notes or timestamped video edits to one person, and they coordinate changes across our designers, editors, and writers until everything is ready.',
   },
   {
     id: 'payment-terms',
     question: 'What are your payment terms and billing options?',
     answer:
-      'We offer transparent monthly retainers for recurring social media content production as well as fixed-scope project billing. Invoices are billed upfront via card or bank transfer with clear deliverables upfront—with no hidden fees or long-term lock-in contracts.',
+      'We offer straightforward monthly retainers for ongoing social media management and creative production, as well as fixed-scope project packages. Invoices are billed upfront via card or bank transfer with clear scope—no hidden fees or long-term lock-in contracts.',
   },
   {
-    id: 'deliverable-formats',
-    question: 'What formats and dimensions are included in delivery?',
+    id: 'virtual-assistant-point',
+    question: 'Who will I actually be talking to every day?',
     answer:
-      'All creatives are exported ready for publishing across Instagram, TikTok, LinkedIn, and Facebook in platform-native aspect ratios (1:1, 4:5, and 9:16). You receive high-resolution PNG/JPG graphics, MP4 video files, and editable source files upon request.',
-  },
-  {
-    id: 'account-manager-point',
-    question: 'Who will handle my day-to-day communication?',
-    answer:
-      'You work directly with one dedicated account manager assigned to your account. They manage your creative queue, brief our copywriters, designers, and video editors behind the scenes, and ensure every deliverable arrives on schedule.',
+      'You only talk to one seasoned virtual assistant with years of social media management experience. Instead of you chasing separate graphic designers, video editors, and caption writers, your virtual assistant manages the entire team, schedule, and delivery queue for you.',
   },
 ] as const;
 
@@ -67,7 +67,7 @@ export function FaqSection({ onBookCall }: FaqSectionProps) {
               Frequently Asked Questions.
             </h2>
             <p className="text-base leading-[1.6] text-neutral-600 mb-6">
-              Everything you need to know about turnaround times, collaboration tools, and payment terms.
+              Clear answers on turnaround times, scheduling and community support, collaboration tools, and payment terms.
             </p>
             <button
               type="button"

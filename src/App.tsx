@@ -15,40 +15,45 @@ const CLOSING_IMAGE = '/src/assets/images/editorial_closing_suite_1794876732812.
 
 const SERVICES = [
   {
-    title: 'Copywriting',
-    description:
-      'Clear, engaging captions, hooks, and ad copy built to stop the scroll and drive action across social channels.',
-  },
-  {
     title: 'Graphic Design',
     description:
-      'Clean, purposeful social media visuals, carousels, and branded posts that make your feed stand out.',
+      'Scroll-stopping social posts, carousels, and branded feed graphics designed to hold attention and keep your visual identity sharp.',
   },
   {
     title: 'Video Editing',
     description:
-      'Engaging short-form social media videos, Reels, and ads edited to capture attention and keep your audience watching.',
+      'Short-form Reels, TikToks, and social video ads cut for strong pacing, clean captions, and higher viewer retention.',
+  },
+  {
+    title: 'Caption Writing',
+    description:
+      'Clear hooks, on-brand captions, and persuasive post copy crafted to spark engagement and turn attention into action.',
+  },
+  {
+    title: 'Scheduling & Community',
+    description:
+      'Optional calendar scheduling, publishing, and active community management—handling comments and DMs so your channels stay responsive.',
   },
 ] as const;
 
 const PROCESS_STEPS = [
   {
     number: '01',
-    title: 'Send your project.',
+    title: 'Hand off the brief.',
     description:
-      'Tell us what your channels need. Share your brief, brand assets, and content requirements.',
+      'Share your brand assets, channel goals, and creative needs once—without complex onboarding or endless spreadsheets.',
   },
   {
     number: '02',
-    title: 'We get to work.',
+    title: 'One experienced VA runs the show.',
     description:
-      'Our social media creative team handles the copy, design, and editing, while your dedicated account manager handles communication and updates.',
+      'Your dedicated virtual assistant—backed by years of social media management experience—coordinates our designers, video editors, and caption writers so you never have to.',
   },
   {
     number: '03',
-    title: 'We deliver.',
+    title: 'Approve and stay live.',
     description:
-      'Receive ready-to-publish social media creatives, formatted for your feeds, stories, and campaigns.',
+      'Receive ready-to-post creatives in your inbox, or let us handle your content scheduling and day-to-day community management as well.',
   },
 ] as const;
 
@@ -185,18 +190,18 @@ export default function App() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end pb-12 lg:pb-16">
               <EditorialReveal immediate y={10} className="lg:col-span-8">
                 <h1 className="font-display font-bold text-[clamp(2.5rem,5.2vw,4.75rem)] leading-[1.02] tracking-[-0.03em] text-[#0A0A0A] text-balance">
-                  Your dedicated social media
+                  Consistent social media,
                   <br />
-                  creatives partner.
+                  without the management.
                 </h1>
               </EditorialReveal>
 
               <EditorialReveal immediate y={10} delay={0.08} className="lg:col-span-4 space-y-6">
                 <p className="text-base sm:text-[17px] leading-[1.6] text-neutral-700">
-                  A dedicated social media creatives content provider delivering copywriting, graphic design, and video editing for brands and agencies.
+                  Juggling separate designers, editors, writers, and posting schedules steals hours from your week—and still leaves your feed inconsistent.
                 </p>
                 <p className="text-sm leading-[1.6] text-neutral-500">
-                  No complicated processes. No unnecessary back-and-forth. Just consistent social content, delivered.
+                  MONO DISTRICT. is your social media management partner for graphic design, video editing, caption writing, scheduling, and community management—all led by one experienced virtual assistant.
                 </p>
                 <div className="pt-2">
                   <button
@@ -228,13 +233,16 @@ export default function App() {
 
             <div className="py-20 lg:py-28">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-14 lg:mb-16">
-                <EditorialReveal className="lg:col-span-4">
+                <EditorialReveal className="lg:col-span-4 space-y-4">
                   <h2 className="font-display font-bold text-3xl sm:text-4xl tracking-[-0.025em] text-[#0A0A0A] text-balance">
                     What We Do.
                   </h2>
+                  <p className="text-sm sm:text-base leading-[1.6] text-neutral-600 max-w-xs">
+                    Every creative asset—plus optional scheduling and community management—built to keep your channels active and cohesive.
+                  </p>
                 </EditorialReveal>
                 <div className="lg:col-span-8">
-                  <div className="grid grid-cols-1 md:grid-cols-3 border-t border-neutral-200 md:border-t-0">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 border-t border-neutral-200">
                     {SERVICES.map((service, index) => (
                       <motion.article
                         key={service.title}
@@ -246,9 +254,9 @@ export default function App() {
                           delay: index * 0.08,
                           ease: EASE_EDITORIAL,
                         }}
-                        className={`py-8 md:py-0 md:px-6 first:md:pl-0 last:md:pr-0 border-b md:border-b-0 border-neutral-200 ${
-                          index < SERVICES.length - 1 ? 'md:border-r md:border-neutral-200' : ''
-                        } flex flex-col justify-between`}
+                        className={`py-8 sm:px-6 ${
+                          index % 2 === 0 ? 'sm:pl-0 sm:border-r sm:border-neutral-200' : 'sm:pr-0'
+                        } border-b border-neutral-200 flex flex-col justify-between`}
                       >
                         <div>
                           <h3 className="font-display font-semibold text-xl tracking-tight text-[#0A0A0A] mb-3">
@@ -265,7 +273,7 @@ export default function App() {
                             onClick={() => openBriefModal(service.title)}
                             className="group inline-flex items-center gap-1.5 text-xs font-medium text-[#0A0A0A] hover:underline underline-offset-4 cursor-pointer whitespace-nowrap shrink-0 py-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A0A0A]"
                           >
-                            <span>Brief {service.title}</span>
+                            <span>Discuss {service.title}</span>
                             <ArrowRight className="w-3.5 h-3.5 transition-transform duration-150 group-hover:translate-x-0.5" />
                           </button>
                         </div>
@@ -300,7 +308,7 @@ export default function App() {
                     Simple By Design.
                   </h2>
                   <p className="text-base sm:text-lg text-neutral-600">
-                    Your social content. Our execution.
+                    One partner. Zero creative bottlenecks.
                   </p>
                 </EditorialReveal>
 
@@ -342,7 +350,7 @@ export default function App() {
                   <div className="lg:col-span-6">
                     <EditorialImage
                       src={CONTACT_IMAGE}
-                      alt="Editorial monochrome portrait of a creative account manager seated at a concrete table reviewing a notebook"
+                      alt="Editorial monochrome portrait of a seasoned virtual assistant seated at a concrete table reviewing a notebook"
                       aspectClassName="aspect-[3/4]"
                       className="lg:h-full"
                     />
@@ -357,22 +365,22 @@ export default function App() {
                         One Point of Contact.
                       </h3>
                       <p className="font-display font-medium text-xl sm:text-2xl tracking-tight text-neutral-800 mb-10">
-                        One account manager. Every account.
+                        One seasoned virtual assistant. Every moving part.
                       </p>
 
                       <div className="space-y-6 text-base sm:text-[17px] leading-[1.7] text-neutral-600 max-w-lg">
                         <p>
-                          No chasing separate writers, designers, or editors—or figuring out who to contact.
+                          Most brands burn out chasing a separate graphic designer, video editor, caption writer, and scheduler—repeating the same feedback four times while deadlines slip.
                         </p>
                         <p>
-                          You&apos;ll have a dedicated account manager as your main point of contact for social content requests, updates, feedback, and ongoing creatives.
+                          With MONO DISTRICT., you only talk to one person. Backed by years of hands-on social media experience, your dedicated virtual assistant manages and coordinates the entire creative team, quality control, timelines, and optional scheduling or community management behind the scenes.
                         </p>
                       </div>
                     </div>
 
                     <div className="mt-12 pt-8 border-t border-neutral-200">
                       <p className="font-display font-semibold text-lg sm:text-xl text-[#0A0A0A]">
-                        You focus on your business. We handle your social media creatives.
+                        You run your business. One experienced virtual assistant runs your social presence.
                       </p>
                     </div>
                   </EditorialReveal>
@@ -405,10 +413,10 @@ export default function App() {
 
                 <EditorialReveal delay={0.08} className="lg:col-span-5 space-y-6">
                   <p className="text-base sm:text-[17px] leading-[1.65] text-neutral-300">
-                    A dedicated social media creatives content provider you can count on—without the complexity of managing an in-house team.
+                    Stop spending your week managing freelancers and patching together content calendars. Get graphic design, video editing, caption writing, and optional scheduling and community management—coordinated by one experienced virtual assistant.
                   </p>
                   <p className="font-display font-medium text-lg text-white">
-                    You brief. We create. We deliver.
+                    One person to talk to. Everything delivered.
                   </p>
                   <div className="pt-2">
                     <button
@@ -439,7 +447,7 @@ export default function App() {
               </div>
 
               <p className="text-sm text-neutral-400">
-                Social media creatives, made simple.
+                Social media management &amp; creatives, led by one virtual assistant.
               </p>
 
               <a

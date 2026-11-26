@@ -17,48 +17,48 @@ const SMM_INCLUSIONS = [
   {
     title: 'Copywriting',
     description:
-      'Hooks, captions, and post copy written to sound like your brand and turn views into leads.',
+      'Hooks, captions, and post copy written to build trust with potential customers and turn views into leads.',
   },
   {
     title: 'Graphic Design',
     description:
-      'Feed posts, carousels, and promo graphics designed to keep your pages sharp and consistent.',
+      'Branded feed posts, carousels, and promo graphics that make your business recognizable in busy feeds.',
   },
   {
     title: 'Video Editing',
     description:
-      'Reels, TikToks, and short-form video ads edited with clean cuts, captions, and pacing that holds attention.',
+      'Reels, TikToks, and short-form video ads cut for strong pacing, clean captions, and wider customer reach.',
   },
   {
     title: 'Content Strategy & Scheduling',
     description:
-      'Monthly content planning, clear topic pillars, and on-time scheduling so your pages never go quiet.',
+      'Monthly content planning, topic pillars, and consistent scheduling so your brand awareness never stalls.',
   },
   {
     title: 'Community Management',
     description:
-      'Daily comment replies, audience engagement, and DM triage so followers and prospects get fast answers while you run your business.',
+      'Daily comment replies, audience engagement, and DM triage so potential customers get fast answers while you run your business.',
   },
 ] as const;
 
 const PROCESS_STEPS = [
   {
     number: '01',
-    title: 'Tell us what your brand needs.',
+    title: 'Share your brand and needed services.',
     description:
-      'Book a free consultation to share your goals, brand voice, and social channels.',
+      'Book a free consultation to walk through your audience goals and pick the social media management services you want included.',
   },
   {
     number: '02',
-    title: 'Get matched with one dedicated Social Media Manager VA.',
+    title: 'Get one VA backed by a creative team.',
     description:
-      'We assign one experienced VA to handle your copywriting, graphic design, video editing, content strategy, scheduling, and community management.',
+      'We assign one dedicated Social Media Manager VA—supported behind the scenes by our creative team at zero extra cost—on a custom hourly or monthly quote.',
   },
   {
     number: '03',
-    title: 'Stay hands-off while your channels run.',
+    title: 'Grow brand awareness hands-off.',
     description:
-      'Review and approve posts in one place while your VA runs the calendar—and gets creative help from our agency behind the scenes at zero extra cost to you.',
+      'Approve posts in one place while your VA and creative team keep your brand consistently reaching potential customers.',
   },
 ] as const;
 
@@ -195,18 +195,18 @@ export default function App() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end pb-12 lg:pb-16">
               <EditorialReveal immediate y={10} className="lg:col-span-8">
                 <h1 className="font-display font-bold text-[clamp(2.35rem,4.7vw,4.45rem)] leading-[1.03] tracking-[-0.03em] text-[#0A0A0A] text-balance">
-                  Hire One Social Media Manager VA.
+                  One Social Media Manager VA.
                   <br />
-                  Skip Hiring a Whole Team.
+                  Backed by a Full Creative Team.
                 </h1>
               </EditorialReveal>
 
               <EditorialReveal immediate y={10} delay={0.08} className="lg:col-span-4 space-y-6">
                 <p className="text-base sm:text-[17px] leading-[1.6] text-neutral-700">
-                  Hiring a separate copywriter, graphic designer, video editor, and scheduler costs a fortune—and leaves you managing four people every week.
+                  Trying to grow brand awareness shouldn&apos;t force business owners to hire and manage four freelancers—or settle for a general VA who can&apos;t create content.
                 </p>
                 <p className="text-sm leading-[1.6] text-neutral-500">
-                  We give you one dedicated Social Media Manager VA who handles all of it, backed by our agency&apos;s creative team behind the scenes at zero extra cost to you.
+                  Hire one dedicated Social Media Manager VA—backed by our creative team at zero extra cost—to handle your content, strategy, scheduling, and community so you reach more potential customers.
                 </p>
                 <div className="pt-2">
                   <button
@@ -243,7 +243,7 @@ export default function App() {
                     What’s Included.
                   </h2>
                   <p className="text-sm sm:text-base leading-[1.6] text-neutral-600 max-w-xs">
-                    Pricing depends on the social media management services you need. Pick the inclusions that fit your business, and we&apos;ll give you a custom quote.
+                    Stop piecing together separate contractors. One Social Media Manager VA backed by a creative team handles all five pillars below—priced via a custom hourly or monthly quote based on the services you include.
                   </p>
                 </EditorialReveal>
                 <div className="lg:col-span-8">
@@ -379,22 +379,22 @@ export default function App() {
                         Why It Works Better.
                       </h3>
                       <p className="font-display font-medium text-xl sm:text-2xl tracking-tight text-neutral-800 mb-10">
-                        Your VA does the work. Our agency backs them up for free.
+                        Built for business owners ready to grow brand awareness.
                       </p>
 
                       <div className="space-y-6 text-base sm:text-[17px] leading-[1.7] text-neutral-600 max-w-lg">
                         <p>
-                          Most business owners get stuck choosing between expensive agency retainers, chasing four separate freelancers, or hiring a general VA who can&apos;t design, edit video, or write strong copy.
+                          You know social media is how potential customers discover and trust your business—yet hiring a full agency costs thousands, juggling separate freelancers eats up your week, and a general VA leaves your pages looking inconsistent.
                         </p>
                         <p>
-                          With MONO DISTRICT., you hire one dedicated Social Media Manager VA who handles your copywriting, graphics, video edits, strategy, scheduling, and community replies. Whenever workloads spike or a campaign needs extra creative work, our agency assists your VA behind the scenes—you don&apos;t pay extra for those creatives, never manage them, and don&apos;t have to worry about a thing.
+                          One Social Media Manager VA backed by our creative team is the solution. Your VA runs your copywriting, graphics, videos, strategy, scheduling, and community replies—while our creative team supports them behind the scenes whenever extra production is needed. You never pay extra for those creatives, never manage them, and never worry about a thing.
                         </p>
                       </div>
                     </div>
 
                     <div className="mt-12 pt-8 border-t border-neutral-200">
                       <p className="font-display font-semibold text-lg sm:text-xl text-[#0A0A0A]">
-                        Tailored pricing based on your inclusions. One person to talk to. Full creative support included.
+                        Hourly or monthly rates based on your inclusions. One VA. Backed by a creative team.
                       </p>
                     </div>
                   </EditorialReveal>
@@ -419,18 +419,18 @@ export default function App() {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end">
                 <EditorialReveal className="lg:col-span-7">
                   <h2 className="font-display font-bold text-[clamp(2.25rem,4.5vw,4rem)] leading-[1.04] tracking-[-0.03em] text-white text-balance">
-                    One VA Hire.
+                    Stop Managing Freelancers.
                     <br />
-                    Nothing Left to Worry About.
+                    Start Reaching Customers.
                   </h2>
                 </EditorialReveal>
 
                 <EditorialReveal delay={0.08} className="lg:col-span-5 space-y-6">
                   <p className="text-base sm:text-[17px] leading-[1.65] text-neutral-300">
-                    Stop juggling freelancers or wondering what to post next. Hire one dedicated Social Media Manager VA for copywriting, graphic design, video editing, content strategy, scheduling, and community management—with agency creative backup included at zero extra cost.
+                    Every week your channels go quiet is missed brand awareness and lost customers. Get one dedicated Social Media Manager VA—backed by our creative team at zero extra cost—to handle all the services you need.
                   </p>
                   <p className="font-display font-medium text-lg text-white">
-                    Book a free consultation and meet your VA.
+                    Book a free consultation for a custom hourly or monthly quote.
                   </p>
                   <div className="pt-2">
                     <button
@@ -461,7 +461,7 @@ export default function App() {
               </div>
 
               <p className="text-sm text-neutral-400">
-                Social Media Manager VA Agency — Full Content, Strategy, Scheduling &amp; Community.
+                Social Media Manager VA Agency — Built for Business Owners Growing Brand Awareness.
               </p>
 
               <a

@@ -10,21 +10,21 @@ interface FaqSectionProps {
 const FAQ_ITEMS = [
   {
     id: 'agency-creative-support',
-    question: 'How does the free agency creative support work?',
+    question: 'How does the creative team backup work?',
     answer:
-      'Your dedicated Social Media Manager VA handles your daily copywriting, graphic design, video editing, strategy, scheduling, and community management. If your brand ever needs extra design or video editing help, our agency assists your VA behind the scenes. You never pay extra for it and never manage those creatives.',
+      'Your dedicated Social Media Manager VA handles your day-to-day social media and is backed by our agency’s creative team whenever extra graphic design or video editing support is needed. You never pay extra for those creatives and never manage them.',
   },
   {
     id: 'scheduling-community',
     question: 'Can I customize which services are included?',
     answer:
-      'Yes. You pick the exact social media management services you need—from copywriting, graphic design, and video editing to content strategy, scheduling, and community management—and we build your Social Media Manager VA quote around those inclusions.',
+      'Yes. You pick the exact social media management services you need—from copywriting, graphic design, and video editing to content strategy, scheduling, and community management—and we tailor your quote around those inclusions.',
   },
   {
     id: 'why-better-than-freelancers',
-    question: 'How is this better than hiring freelancers or a general VA?',
+    question: 'How is this better for business owners than hiring freelancers?',
     answer:
-      'Hiring freelancers means paying multiple rates and managing four separate people. General VAs usually cannot design graphics, edit video, or write strong copy. With MONO DISTRICT., you hire one experienced Social Media Manager VA who covers the inclusions you need—with agency creative backup included.',
+      'Business owners trying to grow brand awareness and reach potential customers often get stuck hiring and managing separate writers, designers, and editors. With MONO DISTRICT., one dedicated Social Media Manager VA backed by a creative team handles all the services you need.',
   },
   {
     id: 'turnaround-times',
@@ -40,9 +40,9 @@ const FAQ_ITEMS = [
   },
   {
     id: 'payment-terms',
-    question: 'How do pricing and quotes work?',
+    question: 'How do pricing and rates work?',
     answer:
-      'Pricing depends on the social media management services you choose to include. You select the inclusions your business needs, and we provide a tailored monthly quote on your consultation—billed upfront via card or bank transfer with free agency creative backup and no long-term lock-in contracts.',
+      'Rates are hourly or monthly depending on your needs and the social media management services you choose to include. You pick the inclusions your business needs, and we provide a tailored quote on your consultation—billed via card or bank transfer with creative team backup included at zero extra cost and no long-term lock-in contracts.',
   },
   {
     id: 'ai-and-craft',
@@ -73,7 +73,7 @@ export function FaqSection({ onBookCall }: FaqSectionProps) {
               Frequently Asked Questions.
             </h2>
             <p className="text-base leading-[1.6] text-neutral-600 mb-6">
-              Clear answers on customizable inclusions, tailored quotes, free agency creative backup, and turnaround times.
+              Clear answers on hourly and monthly rates, customizable inclusions, creative team backup, and turnaround times.
             </p>
             <button
               type="button"

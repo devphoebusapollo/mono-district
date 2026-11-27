@@ -9,46 +9,46 @@ interface FaqSectionProps {
 
 const FAQ_ITEMS = [
   {
-    id: 'agency-creative-support',
-    question: 'How does the creative team backup work?',
+    id: 'specialist-roles',
+    question: 'What specialist VAs can I hire?',
     answer:
-      'Your dedicated Social Media Manager VA handles your day-to-day social media and is backed by our agency’s creative team whenever extra graphic design or video editing support is needed. You never pay extra for those creatives and never manage them.',
+      'You can hire dedicated virtual assistants in four specializations: Social Media Managers (content strategy, scheduling, basic design, community management, and analytics), Graphic Designers, Video Editors, and Web Designers/Developers.',
   },
   {
-    id: 'scheduling-community',
-    question: 'Can I customize which services are included?',
+    id: 'account-manager-communication',
+    question: 'How does communication work if I hire multiple VAs?',
     answer:
-      'Yes. You pick the exact social media management services you need—from copywriting, graphic design, and video editing to content strategy, scheduling, and community management—and we tailor your quote around those inclusions.',
+      'You never communicate directly with the specialist VAs. One dedicated Account Manager sits between you and your team—so whether you have one VA or four, you only ever talk to one person.',
   },
   {
-    id: 'why-better-than-freelancers',
-    question: 'How is this better for business owners than hiring freelancers?',
+    id: 'mix-and-match',
+    question: 'Can I hire just one specialist VA or combine multiple roles?',
     answer:
-      'Business owners trying to grow brand awareness and reach potential customers often get stuck hiring and managing separate writers, designers, and editors. With MONO DISTRICT., one dedicated Social Media Manager VA backed by a creative team handles all the services you need.',
+      'Yes. Hire a single specialist role or combine Social Media Managers, Graphic Designers, Video Editors, and Web Designers/Developers—your Account Manager coordinates all of them behind the scenes for you.',
   },
   {
     id: 'turnaround-times',
-    question: 'How fast will my VA deliver posts and videos?',
+    question: 'What are typical turnaround times across disciplines?',
     answer:
-      'Static graphics and copywriting are typically delivered within 24 to 48 business hours. Short-form videos (Reels, TikToks, video ads) take 2 to 3 business days—keeping your posting calendar consistently ahead.',
+      'Social media posts and static graphic designs are typically delivered within 24 to 48 business hours. Short-form video edits (Reels, TikToks, video ads) take 2 to 3 business days, and web design or development milestones follow clear weekly sprint targets.',
   },
   {
     id: 'collaboration-tools',
     question: 'What tools do we use to share files and feedback?',
     answer:
-      'No new software to learn. Share brand files, raw clips, and approvals via Google Drive, Dropbox, Frame.io, or Notion, and message your VA directly on Slack or email.',
+      'No new software to learn. Share brand files, Figma links, raw footage, or web staging access via Google Drive, Dropbox, Frame.io, or Notion, and message your dedicated Account Manager directly on Slack or email—they relay and manage everything with your VAs.',
   },
   {
     id: 'payment-terms',
     question: 'How do pricing and rates work?',
     answer:
-      'Rates are hourly or monthly depending on your needs and the social media management services you choose to include. You pick the inclusions your business needs, and we provide a tailored quote on your consultation—billed via card or bank transfer with creative team backup included at zero extra cost and no long-term lock-in contracts.',
+      'Rates are hourly or monthly depending on your needs and the specialist VA roles you select. Tell us which disciplines and hours you require on your consultation, and we will provide a custom quote—billed via card or bank transfer with no long-term lock-in contracts.',
   },
   {
     id: 'ai-and-craft',
-    question: 'Do you use AI to create designs or artworks?',
+    question: 'Do you use AI to create designs, videos, or websites?',
     answer:
-      'No. All graphics, videos, and captions are crafted by real people—never AI-generated artwork. We only use AI internally for workflow efficiency like organizing briefs, transcription, and research.',
+      'No. All social copy, graphic designs, video edits, and web builds are crafted by real specialists—never AI-generated artwork. We only use AI internally for workflow efficiency like organizing briefs, transcription, and research.',
   },
 ] as const;
 
@@ -73,7 +73,7 @@ export function FaqSection({ onBookCall }: FaqSectionProps) {
               Frequently Asked Questions.
             </h2>
             <p className="text-base leading-[1.6] text-neutral-600 mb-6">
-              Clear answers on hourly and monthly rates, customizable inclusions, creative team backup, and turnaround times.
+              Clear answers on specialist VA roles, your dedicated Account Manager, hourly and monthly rates, and turnaround times.
             </p>
             <button
               type="button"

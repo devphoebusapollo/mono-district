@@ -416,7 +416,7 @@ export function PortfolioSection({ onBookCall }: PortfolioSectionProps) {
             Selected Work.
           </h2>
           <p className="text-base text-neutral-600">
-            Real social media graphics, reels, and video ads—showing the quality your Social Media Manager VA delivers.
+            Examples of social media graphics, reels, and video ads created by our specialist VAs.
           </p>
         </EditorialReveal>
 

@@ -12,43 +12,43 @@ const FAQ_ITEMS = [
     id: 'specialist-roles',
     question: 'What specialist VAs can I hire?',
     answer:
-      'You can hire dedicated virtual assistants in four specializations: Social Media Managers (content strategy, scheduling, basic design, community management, and analytics), Graphic Designers, Video Editors, and Web Designers/Developers.',
+      'You can hire dedicated virtual assistants in four specializations: Social Media Managers (content strategy, scheduling, basic design, community management, and analytics), Graphic Designers (social creatives, ad graphics, carousels, pitch decks, print/digital collateral), Video Editors (Reels, TikToks, YouTube edits, video ads), and Web Designers/Developers (landing pages, Shopify/WordPress/Webflow sites, custom builds).',
   },
   {
     id: 'account-manager-communication',
-    question: 'How does communication work if I hire multiple VAs?',
+    question: 'How fast does the Account Manager reply, and can I talk to my VA directly?',
     answer:
-      'You never communicate directly with the specialist VAs. One dedicated Account Manager sits between you and your team—so whether you have one VA or four, you only ever talk to one person.',
+      'Your Account Manager replies instantly or within 1 hour during the same day. By default, they relay all briefs and revisions to your designers, editors, and developers. If you ever want to speak directly with a specialist VA, you can—your Account Manager simply monitors the conversation so context and accountability stay intact.',
   },
   {
-    id: 'mix-and-match',
-    question: 'Can I hire just one specialist VA or combine multiple roles?',
+    id: 'revisions-and-fit',
+    question: 'How do revisions work, and what happens if a VA isn’t a fit?',
     answer:
-      'Yes. Hire a single specialist role or combine Social Media Managers, Graphic Designers, Video Editors, and Web Designers/Developers—your Account Manager coordinates all of them behind the scenes for you.',
+      'Send revision notes to your Account Manager and they relay edits directly to your designer, editor, or developer—typically turned around within 24 hours. If a specialist VA ever isn’t the right match for your brand or pace, we replace them promptly at no extra cost while your Account Manager retains your full project history.',
   },
   {
-    id: 'turnaround-times',
-    question: 'What are typical turnaround times across disciplines?',
+    id: 'minimums-contracts-trial',
+    question: 'What are the minimum hours, contract length, and trial terms?',
     answer:
-      'Social media posts and static graphic designs are typically delivered within 24 to 48 business hours. Short-form video edits (Reels, TikToks, video ads) take 2 to 3 business days, and web design or development milestones follow clear weekly sprint targets.',
+      'Our minimum commitment is 3 hours/day (15 hours/week). Contract length fits your schedule and is terminable anytime with zero long-term lock-in—giving you a risk-free way to test the team without multi-month commitments.',
   },
   {
-    id: 'collaboration-tools',
-    question: 'What tools do we use to share files and feedback?',
+    id: 'pricing-and-billing',
+    question: 'How do pricing and billing work?',
     answer:
-      'No new software to learn. Share brand files, Figma links, raw footage, or web staging access via Google Drive, Dropbox, Frame.io, or Notion, and message your dedicated Account Manager directly on Slack or email—they relay and manage everything with your VAs.',
+      'You choose hourly or monthly billing based on your daily hours (starting at 3 hours/day) and the specialist role(s) you hire. We confirm a clear flat rate during your consultation and invoice via card or bank transfer with no hidden fees.',
   },
   {
-    id: 'payment-terms',
-    question: 'How do pricing and rates work?',
+    id: 'turnaround-and-tools',
+    question: 'What are your turnaround times and collaboration tools?',
     answer:
-      'Rates are hourly or monthly depending on your needs and the specialist VA roles you select. Tell us which disciplines and hours you require on your consultation, and we will provide a custom quote—billed via card or bank transfer with no long-term lock-in contracts.',
+      'Static graphics and social copy deliver in 24 to 48 business hours, short-form Reels and video ads in 2 to 3 business days, and web design or development milestones ship weekly. Files and approvals run through Google Drive, Dropbox, Figma, Frame.io, or Notion, with daily communication over Slack or email.',
   },
   {
-    id: 'ai-and-craft',
-    question: 'Do you use AI to create designs, videos, or websites?',
+    id: 'nda-and-craft',
+    question: 'Do you sign NDAs and use real specialists instead of AI artwork?',
     answer:
-      'No. All social copy, graphic designs, video edits, and web builds are crafted by real specialists—never AI-generated artwork. We only use AI internally for workflow efficiency like organizing briefs, transcription, and research.',
+      'Yes—we sign an NDA upfront before onboarding so your logins, brand files, and business data stay strictly protected. Every graphic, video edit, post, and line of code is crafted by human specialists; AI is only used internally for meeting notes, transcription, and research.',
   },
 ] as const;
 
@@ -73,14 +73,14 @@ export function FaqSection({ onBookCall }: FaqSectionProps) {
               Frequently Asked Questions.
             </h2>
             <p className="text-base leading-[1.6] text-neutral-600 mb-6">
-              Clear answers on specialist VA roles, your dedicated Account Manager, hourly and monthly rates, and turnaround times.
+              Direct answers on response times, revisions, 3-hour minimums, NDAs, turnaround times, and pricing.
             </p>
             <button
               type="button"
               onClick={onBookCall}
               className="group inline-flex items-center gap-2 text-xs font-medium text-[#0A0A0A] hover:underline underline-offset-4 cursor-pointer whitespace-nowrap shrink-0 py-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A0A0A]"
             >
-              <span>Still have questions? Book a call</span>
+              <span>Still have questions? Free Consultation</span>
               <ArrowRight className="w-3.5 h-3.5 transition-transform duration-150 group-hover:translate-x-0.5" />
             </button>
           </EditorialReveal>

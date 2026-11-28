@@ -17,43 +17,43 @@ const SPECIALISTS = [
   {
     title: 'Social Media Managers',
     description:
-      'Handles your day-to-day social presence: content strategy, post scheduling, basic graphic design, comment and DM community management, and performance analytics.',
+      'Handle your day-to-day social presence: content strategy, post scheduling, basic graphic design, comment and DM community management, and performance analytics.',
   },
   {
     title: 'Graphic Designers',
     description:
-      'Creates custom brand visuals: social media graphics, ad creatives, carousels, marketing flyers, pitch decks, and print or digital collateral.',
+      'Create custom brand visuals: social media graphics, ad creatives, carousels, marketing flyers, pitch decks, and print or digital collateral.',
   },
   {
     title: 'Video Editors',
     description:
-      'Edits engaging video content: Instagram Reels, TikToks, YouTube videos, and paid video ads with clean cuts, captions, sound design, and strong pacing.',
+      'Edit engaging video content: Instagram Reels, TikToks, YouTube videos, and paid video ads with clean cuts, captions, sound design, and strong pacing.',
   },
   {
     title: 'Web Designers / Developers',
     description:
-      'Designs and builds your web presence: landing pages, business websites, e-commerce storefronts, responsive layouts, and ongoing site updates.',
+      'Design and build your web presence: landing pages, business websites, e-commerce storefronts, responsive layouts, and ongoing site updates.',
   },
 ] as const;
 
 const PROCESS_STEPS = [
   {
     number: '01',
-    title: 'Pick the specialist VAs you need.',
+    title: 'Choose your specialist VAs and sign an upfront NDA.',
     description:
-      'Book a free consultation to share your goals and choose the roles you need—Social Media Managers, Graphic Designers, Video Editors, or Web Designers/Developers.',
+      'Book a free consultation to define your daily hours (starting at 3 hours/day) and select the VA roles you need. We sign an NDA upfront before onboarding so your brand files, logins, and data stay protected.',
   },
   {
     number: '02',
-    title: 'Get a custom hourly or monthly quote.',
+    title: 'Work through your dedicated Account Manager.',
     description:
-      'We assign vetted specialist VAs along with one dedicated Account Manager to oversee your account—quoted hourly or monthly based on your workload.',
+      'Your Account Manager replies instantly or within 1 hour the same day and relays briefs and revisions straight to your designers, editors, and developers. Prefer to speak directly with a VA? You can—your Account Manager monitors the chat so nothing slips.',
   },
   {
     number: '03',
-    title: 'Communicate with one person, never multiple VAs.',
+    title: 'Scale freely with terminable-anytime terms.',
     description:
-      'You never manage or message VAs directly. Send requests and feedback to your Account Manager, and they coordinate every specialist for you.',
+      'Run on flexible hourly or monthly billing with no long-term contracts. If a specialist ever isn’t the right fit for your brand or pace, we replace them promptly at no extra cost.',
   },
 ] as const;
 
@@ -103,6 +103,12 @@ export default function App() {
                 className="hover:text-[#0A0A0A] hover:underline underline-offset-4 transition-colors duration-150 whitespace-nowrap shrink-0"
               >
                 Process
+              </a>
+              <a
+                href="#faq"
+                className="hover:text-[#0A0A0A] hover:underline underline-offset-4 transition-colors duration-150 whitespace-nowrap shrink-0"
+              >
+                FAQ
               </a>
               <a
                 href="#start"
@@ -165,6 +171,13 @@ export default function App() {
                     Process
                   </a>
                   <a
+                    href="#faq"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="py-1.5 hover:text-[#0A0A0A]"
+                  >
+                    FAQ
+                  </a>
+                  <a
                     href="#start"
                     onClick={() => setMobileMenuOpen(false)}
                     className="py-1.5 hover:text-[#0A0A0A]"
@@ -189,19 +202,19 @@ export default function App() {
           <section className="max-w-[1360px] mx-auto px-6 md:px-10 lg:px-12 pt-16 sm:pt-20 lg:pt-24 pb-16 lg:pb-24">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end pb-12 lg:pb-16">
               <EditorialReveal immediate y={10} className="lg:col-span-8">
-                <h1 className="font-display font-bold text-[clamp(2.35rem,4.7vw,4.45rem)] leading-[1.03] tracking-[-0.03em] text-[#0A0A0A] text-balance">
-                  Virtual Assistants for
+                <h1 className="font-display font-bold text-[clamp(2.15rem,4.3vw,4.15rem)] leading-[1.04] tracking-[-0.03em] text-[#0A0A0A] text-balance">
+                  A Managed Virtual Assistant Agency.
                   <br />
-                  Social Media, Design, Video &amp; Web.
+                  We Staff &amp; Manage Your Specialist VAs.
                 </h1>
               </EditorialReveal>
 
-              <EditorialReveal immediate y={10} delay={0.08} className="lg:col-span-4 space-y-6">
-                <p className="text-base sm:text-[17px] leading-[1.6] text-neutral-700">
-                  Tired of hunting for reliable freelancers or managing multiple VAs across scattered group chats?
+              <EditorialReveal immediate y={10} delay={0.08} className="lg:col-span-4 space-y-5">
+                <p className="text-base sm:text-[17px] leading-[1.6] text-neutral-800">
+                  MONO DISTRICT. places vetted Social Media Managers, Graphic Designers, Video Editors, and Web Designers/Developers into your business—and manages them for you through one Account Manager.
                 </p>
                 <p className="text-sm leading-[1.6] text-neutral-500">
-                  MONO DISTRICT. is a VA agency providing dedicated Social Media Managers, Graphic Designers, Video Editors, and Web Designers/Developers—with one Account Manager handling all communication for you. Hourly or monthly rates.
+                  Your Account Manager replies within 1 hour, relays revisions, and keeps work moving daily. Starts at 3 hours/day, with upfront NDAs and flexible hourly or monthly terms terminable anytime.
                 </p>
                 <div className="pt-2">
                   <button
@@ -235,10 +248,10 @@ export default function App() {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-14 lg:mb-16">
                 <EditorialReveal className="lg:col-span-4 space-y-4">
                   <h2 className="font-display font-bold text-3xl sm:text-4xl tracking-[-0.025em] text-[#0A0A0A] text-balance">
-                    Specialist VAs You Can Hire.
+                    Specialist VAs We Place.
                   </h2>
                   <p className="text-sm sm:text-base leading-[1.6] text-neutral-600 max-w-xs">
-                    Hire one role or build a multi-skill team. You never message VAs directly—one dedicated Account Manager handles every brief for you on a custom hourly or monthly quote.
+                    Hire one dedicated specialist or combine multiple roles below. Each VA focuses on their craft while our agency handles management, quality control, and coordination.
                   </p>
                 </EditorialReveal>
                 <div className="lg:col-span-8">
@@ -275,7 +288,7 @@ export default function App() {
                             onClick={() => openBriefModal(item.title)}
                             className="group inline-flex items-center gap-1.5 text-xs font-medium text-[#0A0A0A] hover:underline underline-offset-4 cursor-pointer whitespace-nowrap shrink-0 py-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A0A0A]"
                           >
-                            <span>Request a quote</span>
+                            <span>Free Consultation</span>
                             <ArrowRight className="w-3.5 h-3.5 transition-transform duration-150 group-hover:translate-x-0.5" />
                           </button>
                         </div>
@@ -310,39 +323,76 @@ export default function App() {
                     How It Works.
                   </h2>
                   <p className="text-base sm:text-lg text-neutral-600">
-                    Simple onboarding. One point of contact.
+                    Simple onboarding, same-hour replies, zero lock-in.
                   </p>
                 </EditorialReveal>
 
-                <div className="lg:col-span-8 border-b border-neutral-200">
+                <div className="lg:col-span-8">
                   {PROCESS_STEPS.map((step, index) => (
                     <motion.div
                       key={step.number}
-                      initial={{ opacity: 0, y: 14 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, amount: 0.2 }}
-                      transition={{
-                        duration: 0.45,
-                        delay: index * 0.08,
-                        ease: EASE_EDITORIAL,
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, amount: 0.22 }}
+                      variants={{
+                        hidden: {},
+                        visible: {
+                          transition: {
+                            delayChildren: index * 0.12,
+                            staggerChildren: 0.07,
+                          },
+                        },
                       }}
-                      className="border-t border-neutral-200 py-8 sm:py-10 grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-8 items-baseline"
+                      className="relative py-8 sm:py-10 grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-8 items-baseline"
                     >
-                      <div className="sm:col-span-2">
+                      <motion.div
+                        aria-hidden="true"
+                        variants={{
+                          hidden: { scaleX: 0 },
+                          visible: {
+                            scaleX: 1,
+                            transition: { duration: 0.55, ease: EASE_EDITORIAL },
+                          },
+                        }}
+                        style={{ transformOrigin: '0% 50%' }}
+                        className="absolute top-0 left-0 right-0 h-px bg-neutral-200"
+                      />
+                      <motion.div
+                        variants={{
+                          hidden: { opacity: 0, x: -10 },
+                          visible: {
+                            opacity: 1,
+                            x: 0,
+                            transition: { duration: 0.45, ease: EASE_EDITORIAL },
+                          },
+                        }}
+                        className="sm:col-span-2"
+                      >
                         <span className="font-mono text-sm tabular-nums text-neutral-400">
                           {step.number}
                         </span>
-                      </div>
-                      <div className="sm:col-span-10">
+                      </motion.div>
+                      <motion.div
+                        variants={{
+                          hidden: { opacity: 0, y: 20 },
+                          visible: {
+                            opacity: 1,
+                            y: 0,
+                            transition: { duration: 0.5, ease: EASE_EDITORIAL },
+                          },
+                        }}
+                        className="sm:col-span-10"
+                      >
                         <h3 className="font-display font-semibold text-xl sm:text-2xl tracking-tight text-[#0A0A0A] mb-3">
                           {step.title}
                         </h3>
                         <p className="text-base leading-[1.65] text-neutral-600 max-w-xl">
                           {step.description}
                         </p>
-                      </div>
+                      </motion.div>
                     </motion.div>
                   ))}
+                  <HairlineRule />
                 </div>
               </div>
 
@@ -366,23 +416,52 @@ export default function App() {
                       <h3 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl tracking-[-0.03em] leading-[1.06] text-[#0A0A0A] mb-6 text-balance">
                         Why It Works Better.
                       </h3>
-                      <p className="font-display font-medium text-xl sm:text-2xl tracking-tight text-neutral-800 mb-10">
-                        One Account Manager. Zero VA management headaches.
+                      <p className="font-display font-medium text-xl sm:text-2xl tracking-tight text-neutral-800 mb-8">
+                        How we compare to solo freelancers and traditional agencies.
                       </p>
 
-                      <div className="space-y-6 text-base sm:text-[17px] leading-[1.7] text-neutral-600 max-w-lg">
-                        <p>
-                          Most business owners waste weeks hiring separate freelancers—or spend half their day chasing multiple VAs across different chats and tools.
-                        </p>
-                        <p>
-                          With MONO DISTRICT., you get dedicated VAs in Social Media Management, Graphic Design, Video Editing, and Web Design/Development without managing a single one. A dedicated Account Manager sits between you and your VAs—taking your requests, assigning tasks, checking quality, and delivering finished work to you.
-                        </p>
+                      <div className="border-t border-neutral-200 divide-y divide-neutral-200 text-sm sm:text-[15px]">
+                        <div className="py-5 space-y-1.5">
+                          <p className="font-display font-semibold text-[#0A0A0A]">
+                            Communication &amp; Revisions
+                          </p>
+                          <p className="text-neutral-700">
+                            <span className="font-medium text-[#0A0A0A]">MONO DISTRICT.:</span> Instant to 1-hour same-day Account Manager replies, relayed revisions, and monitored direct VA chat on request.
+                          </p>
+                          <p className="text-neutral-500">
+                            <span className="font-medium text-neutral-700">Freelancers &amp; Agencies:</span> Chasing separate freelancer inboxes yourself, or waiting days in slow agency ticket queues.
+                          </p>
+                        </div>
+
+                        <div className="py-5 space-y-1.5">
+                          <p className="font-display font-semibold text-[#0A0A0A]">
+                            Consistency &amp; Fit
+                          </p>
+                          <p className="text-neutral-700">
+                            <span className="font-medium text-[#0A0A0A]">MONO DISTRICT.:</span> Prompt specialist replacement at zero cost if a VA isn&apos;t the right match—while your Account Manager retains full project history.
+                          </p>
+                          <p className="text-neutral-500">
+                            <span className="font-medium text-neutral-700">Freelancers &amp; Agencies:</span> Starting over from scratch if someone disappears, or getting handed off to unvetted juniors.
+                          </p>
+                        </div>
+
+                        <div className="py-5 space-y-1.5">
+                          <p className="font-display font-semibold text-[#0A0A0A]">
+                            Terms &amp; Confidentiality
+                          </p>
+                          <p className="text-neutral-700">
+                            <span className="font-medium text-[#0A0A0A]">MONO DISTRICT.:</span> Minimum 3 hours/day, flexible hourly or monthly billing, terminable anytime, and upfront NDA protection.
+                          </p>
+                          <p className="text-neutral-500">
+                            <span className="font-medium text-neutral-700">Freelancers &amp; Agencies:</span> Informal confidentiality habits or $3,000–$8,000+/month retainers locked into multi-month contracts.
+                          </p>
+                        </div>
                       </div>
                     </div>
 
-                    <div className="mt-12 pt-8 border-t border-neutral-200">
+                    <div className="mt-10 pt-8 border-t border-neutral-200">
                       <p className="font-display font-semibold text-lg sm:text-xl text-[#0A0A0A]">
-                        You talk to one Account Manager. Our specialist VAs get the work done. Hourly or monthly rates.
+                        One agency. Vetted specialists. Zero long-term lock-in.
                       </p>
                     </div>
                   </EditorialReveal>
@@ -407,18 +486,18 @@ export default function App() {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end">
                 <EditorialReveal className="lg:col-span-7">
                   <h2 className="font-display font-bold text-[clamp(2.25rem,4.5vw,4rem)] leading-[1.04] tracking-[-0.03em] text-white text-balance">
-                    One Point of Contact.
+                    Ready for Managed VAs
                     <br />
-                    Four VA Specializations.
+                    and Clear Output?
                   </h2>
                 </EditorialReveal>
 
                 <EditorialReveal delay={0.08} className="lg:col-span-5 space-y-6">
                   <p className="text-base sm:text-[17px] leading-[1.65] text-neutral-300">
-                    Stop chasing freelancers or managing multiple chats. Hire dedicated Social Media Managers, Graphic Designers, Video Editors, and Web Designers/Developers—all run through one Account Manager.
+                    Start from 3 hours/day under an upfront NDA, with flexible terms you can end anytime. We will place vetted Social Media, Design, Video, and Web VAs tailored to your workflow.
                   </p>
                   <p className="font-display font-medium text-lg text-white">
-                    Book a free consultation for a custom hourly or monthly quote.
+                    Book your 30-minute consultation to lock in your hourly or monthly rate.
                   </p>
                   <div className="pt-2">
                     <button
@@ -449,7 +528,7 @@ export default function App() {
               </div>
 
               <p className="text-sm text-neutral-400">
-                Specialist VA Agency — Social Media, Graphic Design, Video Editing &amp; Web Development.
+                Managed Virtual Assistant Agency — Social Media, Graphic Design, Video Editing &amp; Web Development.
               </p>
 
               <a

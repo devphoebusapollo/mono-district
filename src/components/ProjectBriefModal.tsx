@@ -75,7 +75,7 @@ export function ProjectBriefModal({
               <div className="flex items-center gap-6 min-w-0">
                 <BrandMark size="sm" />
                 <div className="sr-only sm:not-sr-only sm:flex items-center gap-2 text-xs text-neutral-500 truncate">
-                  <span id="brief-modal-title">Book a 30-minute call for your custom quote</span>
+                  <span id="brief-modal-title">Book a free 30-minute consultation for your quote</span>
                   {defaultDiscipline && (
                     <>
                       <span aria-hidden="true">·</span>

@@ -137,6 +137,7 @@ export function PortfolioLightbox({
                     key={item.id}
                     src={item.mediaUrl}
                     poster={item.posterUrl}
+                    aria-label={item.alt}
                     controls
                     playsInline
                     loop
@@ -159,7 +160,7 @@ export function PortfolioLightbox({
                   <motion.img
                     key={item.id}
                     src={item.mediaUrl}
-                    alt="Social media graphic design sample"
+                    alt={item.alt}
                     referrerPolicy="no-referrer"
                     onError={() => setHasError(true)}
                     initial={{ opacity: 0, scale: 0.985 }}

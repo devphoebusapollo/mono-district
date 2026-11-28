@@ -81,9 +81,7 @@ function PortfolioTile({
       <button
         type="button"
         onClick={onClick}
-        aria-label={
-          item.mediaType === 'video' ? 'Play reel or video ad sample' : 'View social media graphic sample'
-        }
+        aria-label={`View ${item.alt}`}
         className="w-full block text-left cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0A0A0A]"
       >
         <div
@@ -106,7 +104,7 @@ function PortfolioTile({
                 loop
                 playsInline
                 preload="metadata"
-                aria-label="Social media reel preview"
+                aria-label={item.alt}
                 onError={() => setHasError(true)}
                 className="w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]"
               />
@@ -120,7 +118,7 @@ function PortfolioTile({
           ) : (
             <img
               src={item.mediaUrl}
-              alt="Social media graphic design sample"
+              alt={item.alt}
               referrerPolicy="no-referrer"
               decoding="async"
               onError={() => setHasError(true)}
@@ -416,7 +414,7 @@ export function PortfolioSection({ onBookCall }: PortfolioSectionProps) {
             Selected Work.
           </h2>
           <p className="text-base text-neutral-600">
-            Examples of social media graphics, reels, and video ads created by our specialist VAs.
+            Sample graphics, reels, and video ads produced by the specialist VAs we place.
           </p>
         </EditorialReveal>
 

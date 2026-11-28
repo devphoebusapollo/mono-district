@@ -199,10 +199,16 @@ export default function App() {
 
         <main className="flex-1">
           {/* Hero Section */}
-          <section className="max-w-[1360px] mx-auto px-6 md:px-10 lg:px-12 pt-16 sm:pt-20 lg:pt-24 pb-16 lg:pb-24">
+          <section
+            aria-labelledby="hero-heading"
+            className="max-w-[1360px] mx-auto px-6 md:px-10 lg:px-12 pt-16 sm:pt-20 lg:pt-24 pb-16 lg:pb-24"
+          >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end pb-12 lg:pb-16">
               <EditorialReveal immediate y={10} className="lg:col-span-8">
-                <h1 className="font-display font-bold text-[clamp(2.15rem,4.3vw,4.15rem)] leading-[1.04] tracking-[-0.03em] text-[#0A0A0A] text-balance">
+                <h1
+                  id="hero-heading"
+                  className="font-display font-bold text-[clamp(2.15rem,4.3vw,4.15rem)] leading-[1.04] tracking-[-0.03em] text-[#0A0A0A] text-balance"
+                >
                   A Managed Virtual Assistant Agency.
                   <br />
                   We Staff &amp; Manage Your Specialist VAs.
@@ -210,12 +216,14 @@ export default function App() {
               </EditorialReveal>
 
               <EditorialReveal immediate y={10} delay={0.08} className="lg:col-span-4 space-y-5">
-                <p className="text-base sm:text-[17px] leading-[1.6] text-neutral-800">
-                  MONO DISTRICT. places vetted Social Media Managers, Graphic Designers, Video Editors, and Web Designers/Developers into your business—and manages them for you through one Account Manager.
-                </p>
-                <p className="text-sm leading-[1.6] text-neutral-500">
-                  Your Account Manager replies within 1 hour, relays revisions, and keeps work moving daily. Starts at 3 hours/day, with upfront NDAs and flexible hourly or monthly terms terminable anytime.
-                </p>
+                <div id="hero-summary" className="space-y-5">
+                  <p className="text-base sm:text-[17px] leading-[1.6] text-neutral-800">
+                    MONO DISTRICT. places vetted Social Media Managers, Graphic Designers, Video Editors, and Web Designers/Developers into your business—and manages them for you through one Account Manager.
+                  </p>
+                  <p className="text-sm leading-[1.6] text-neutral-500">
+                    Your Account Manager replies within 1 hour, relays revisions, and keeps work moving daily. Starts at 3 hours/day, with upfront NDAs and flexible hourly or monthly terms terminable anytime.
+                  </p>
+                </div>
                 <div className="pt-2">
                   <button
                     type="button"
@@ -240,6 +248,7 @@ export default function App() {
           {/* Section 1: Specialist VA Disciplines */}
           <section
             id="capabilities"
+            aria-labelledby="specialists-heading"
             className="max-w-[1360px] mx-auto px-6 md:px-10 lg:px-12"
           >
             <HairlineRule />
@@ -247,7 +256,10 @@ export default function App() {
             <div className="py-20 lg:py-28">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-14 lg:mb-16">
                 <EditorialReveal className="lg:col-span-4 space-y-4">
-                  <h2 className="font-display font-bold text-3xl sm:text-4xl tracking-[-0.025em] text-[#0A0A0A] text-balance">
+                  <h2
+                    id="specialists-heading"
+                    className="font-display font-bold text-3xl sm:text-4xl tracking-[-0.025em] text-[#0A0A0A] text-balance"
+                  >
                     Specialist VAs We Place.
                   </h2>
                   <p className="text-sm sm:text-base leading-[1.6] text-neutral-600 max-w-xs">
@@ -312,6 +324,7 @@ export default function App() {
           {/* Section 2: Simple By Design */}
           <section
             id="process"
+            aria-labelledby="process-heading"
             className="max-w-[1360px] mx-auto px-6 md:px-10 lg:px-12"
           >
             <HairlineRule />
@@ -319,7 +332,10 @@ export default function App() {
             <div className="py-20 lg:py-28">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
                 <EditorialReveal className="lg:col-span-4 lg:sticky lg:top-24">
-                  <h2 className="font-display font-bold text-3xl sm:text-4xl tracking-[-0.025em] text-[#0A0A0A] mb-4 text-balance">
+                  <h2
+                    id="process-heading"
+                    className="font-display font-bold text-3xl sm:text-4xl tracking-[-0.025em] text-[#0A0A0A] mb-4 text-balance"
+                  >
                     How It Works.
                   </h2>
                   <p className="text-base sm:text-lg text-neutral-600">
@@ -413,50 +429,53 @@ export default function App() {
                     className="lg:col-span-6 flex flex-col justify-between py-2 lg:py-6"
                   >
                     <div>
-                      <h3 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl tracking-[-0.03em] leading-[1.06] text-[#0A0A0A] mb-6 text-balance">
+                      <h3
+                        id="why-better-heading"
+                        className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl tracking-[-0.03em] leading-[1.06] text-[#0A0A0A] mb-6 text-balance"
+                      >
                         Why It Works Better.
                       </h3>
                       <p className="font-display font-medium text-xl sm:text-2xl tracking-tight text-neutral-800 mb-8">
                         How we compare to solo freelancers and traditional agencies.
                       </p>
 
-                      <div className="border-t border-neutral-200 divide-y divide-neutral-200 text-sm sm:text-[15px]">
+                      <dl className="border-t border-neutral-200 divide-y divide-neutral-200 text-sm sm:text-[15px]">
                         <div className="py-5 space-y-1.5">
-                          <p className="font-display font-semibold text-[#0A0A0A]">
+                          <dt className="font-display font-semibold text-[#0A0A0A]">
                             Communication &amp; Revisions
-                          </p>
-                          <p className="text-neutral-700">
+                          </dt>
+                          <dd className="text-neutral-700">
                             <span className="font-medium text-[#0A0A0A]">MONO DISTRICT.:</span> Instant to 1-hour same-day Account Manager replies, relayed revisions, and monitored direct VA chat on request.
-                          </p>
-                          <p className="text-neutral-500">
+                          </dd>
+                          <dd className="text-neutral-500">
                             <span className="font-medium text-neutral-700">Freelancers &amp; Agencies:</span> Chasing separate freelancer inboxes yourself, or waiting days in slow agency ticket queues.
-                          </p>
+                          </dd>
                         </div>
 
                         <div className="py-5 space-y-1.5">
-                          <p className="font-display font-semibold text-[#0A0A0A]">
+                          <dt className="font-display font-semibold text-[#0A0A0A]">
                             Consistency &amp; Fit
-                          </p>
-                          <p className="text-neutral-700">
+                          </dt>
+                          <dd className="text-neutral-700">
                             <span className="font-medium text-[#0A0A0A]">MONO DISTRICT.:</span> Prompt specialist replacement at zero cost if a VA isn&apos;t the right match—while your Account Manager retains full project history.
-                          </p>
-                          <p className="text-neutral-500">
+                          </dd>
+                          <dd className="text-neutral-500">
                             <span className="font-medium text-neutral-700">Freelancers &amp; Agencies:</span> Starting over from scratch if someone disappears, or getting handed off to unvetted juniors.
-                          </p>
+                          </dd>
                         </div>
 
                         <div className="py-5 space-y-1.5">
-                          <p className="font-display font-semibold text-[#0A0A0A]">
+                          <dt className="font-display font-semibold text-[#0A0A0A]">
                             Terms &amp; Confidentiality
-                          </p>
-                          <p className="text-neutral-700">
+                          </dt>
+                          <dd className="text-neutral-700">
                             <span className="font-medium text-[#0A0A0A]">MONO DISTRICT.:</span> Minimum 3 hours/day, flexible hourly or monthly billing, terminable anytime, and upfront NDA protection.
-                          </p>
-                          <p className="text-neutral-500">
+                          </dd>
+                          <dd className="text-neutral-500">
                             <span className="font-medium text-neutral-700">Freelancers &amp; Agencies:</span> Informal confidentiality habits or $3,000–$8,000+/month retainers locked into multi-month contracts.
-                          </p>
+                          </dd>
                         </div>
-                      </div>
+                      </dl>
                     </div>
 
                     <div className="mt-10 pt-8 border-t border-neutral-200">

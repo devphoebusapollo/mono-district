@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+>
   <url>
     <loc>https://ais-pre-lfenixtyptwovoyt52bqkz-1003545204964.asia-east1.run.app/</loc>
+    <lastmod>2026-11-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://ais-pre-lfenixtyptwovoyt52bqkz-1003545204964.asia-east1.run.app/assets/aistudio/Minimalist_Mono_District_Logo_b207e912.png</image:loc>
+      <image:title>MONO DISTRICT. — Managed Virtual Assistant Agency</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://ais-pre-lfenixtyptwovoyt52bqkz-1003545204964.asia-east1.run.app/og-image.jpg</image:loc>
+      <image:title>MONO DISTRICT. Creative Studio Workspace</image:title>
+    </image:image>
   </url>
 </urlset>

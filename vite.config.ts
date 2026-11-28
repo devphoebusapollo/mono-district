@@ -56,7 +56,12 @@ export default defineConfig(() => {
 
           const envOrigin = resolveEnvOrigin();
           if (envOrigin && envOrigin !== DEFAULT_OG_ORIGIN) {
-            for (const filename of ['robots.txt', 'sitemap.xml']) {
+            for (const filename of [
+              'robots.txt',
+              'sitemap.xml',
+              'llms.txt',
+              'llms-full.txt',
+            ]) {
               const targetPath = path.resolve(distDir, filename);
               if (fs.existsSync(targetPath)) {
                 const raw = fs.readFileSync(targetPath, 'utf-8');
